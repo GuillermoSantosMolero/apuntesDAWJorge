@@ -1,0 +1,3 @@
+ECMAScript ---> Especificacion técnica
+JScript ---> Lenguaje de scripting.
+C,C++ --> Lenguaje de programación.

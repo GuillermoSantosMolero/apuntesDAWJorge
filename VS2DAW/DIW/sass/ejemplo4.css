@@ -1,0 +1,25 @@
+.profile-pepe {
+  background: image-url("img/pepe.png") no-repeat;
+}
+
+.profile-lola {
+  background: image-url("img/lola.png") no-repeat;
+}
+
+.profile-manuel {
+  background: image-url("img/manuel.png") no-repeat;
+}
+
+.perfil-pepe {
+  background-image: image-url("img/pepe.png");
+}
+
+.perfil-lola {
+  background-image: image-url("img/lola.png");
+}
+
+.perfil-manuel {
+  background-image: image-url("img/manuel.png");
+}
+
+/*# sourceMappingURL=ejemplo4.css.map */

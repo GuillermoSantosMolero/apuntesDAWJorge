@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CURSO VUE</title>
+    <link rel="stylesheet" href="../../bootstrap.css">
+</head>
+<div id="app" class="container mt-5">
+    <h1>{{mensaje}}</h1>
+    <h1>{{invertir}}</h1>
+    <br>
+    <button class="btn btn-primary" @click="contador++">+</button>    
+    <button class="btn btn-danger" @click="contador--">-</button>  
+    <h3>{{contador}}</h3>
+    <div class="progress">
+        <div class="progress-bar bg-success" role="progressbar" 
+        :style="{'width':contador+'%'}" aria-valuenow="25" aria-valuemin="0"
+        aria-valuemax="100">
+            {{contador}}%
+        </div>
+    </div>
+    <div class="progress">
+        <div class="progress-bar bg-success" role="progressbar" 
+        :style="{'width':contador+'%'}" aria-valuenow="25" aria-valuemin="0"
+        aria-valuemax="100" :class="[color]">
+            {{contador}}%
+        </div>
+    </div>
+</div>
+<script src="../../vue.js"></script>
+<script src="ejemplo5.js"></script>
+</html>

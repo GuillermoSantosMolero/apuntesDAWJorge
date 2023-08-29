@@ -1,0 +1,33 @@
+body{
+    margin: 0em 4em;
+    text-align: center;
+    background: url("../fotos/fondo.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+img{
+    width: 450px;
+    height: 350px;
+    border-radius: 5%;
+}
+nav{
+    margin: 1em;
+    background-color: black;
+}
+a{
+    margin: 2em;
+    color: white;
+}
+h1{
+    color: black;
+}
+select{
+    background-color: black;
+    color: white;
+    width: 450px;
+}
+#masInfo{
+    color: black;
+}

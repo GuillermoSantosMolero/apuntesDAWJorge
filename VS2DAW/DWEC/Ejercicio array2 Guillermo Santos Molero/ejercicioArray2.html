@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title></title>
+		<style>
+			input{
+				width: 5em;
+			}
+		</style>
+
+	</head>
+	<body>
+		<h1>Ejercicio arrays:</h1><br />
+		<form>
+			<textarea name="mensaje" id="mensaje" value=""></textarea><br />
+			<label>El texto separado en letras es el siguiente:</label>
+			<p id="mostrarArray"></p>
+			<p id="vecesyletramasrepetida"></p>
+			<input type="button" value="Ejecutar" onclick="jugar();" />
+		</form>
+		<script>
+		function jugar(){
+			var linea = document.getElementById("mensaje").value.toLowerCase();
+			var abecedario = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+			var miArray= linea.split("");
+			miArray=miArray.filter(Boolean);
+			miArray.sort();
+			var charmasrepetido='a';
+			var vecesmasrepetido=0;
+			var charactual='a';
+			var vecesrepetido=0;
+			for(var i=0;i<(miArray.length);i++){
+				charactual=miArray[i];
+				vecesrepetido++;
+				if(charactual!=miArray[i+1] || miArray[i+1]==null){
+					if(vecesmasrepetido<=vecesrepetido){
+						vecesmasrepetido=vecesrepetido;
+						charmasrepetido=charactual;
+					}	
+					//alert(charactual+vecesrepetido);
+					vecesrepetido=0;
+				}
+			}
+			if(charmasrepetido==' '){
+				charmasrepetido=" el espacio"
+			}
+			document.getElementById("mostrarArray").innerHTML = miArray;
+			document.getElementById("vecesyletramasrepetida").innerHTML="La letra mas repetida es "+charmasrepetido+", que se ha repetido "+vecesmasrepetido+" veces";
+			
+		}
+		</script>
+	</body>
+	
+</html>

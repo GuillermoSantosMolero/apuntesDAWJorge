@@ -1,0 +1,258 @@
+/* *************************************************************/
+/* 1. Obtener el peso medio de cada una de las especies de la */
+/* granja                                                     */
+/* *************************************************************/
+
+SELECT A.ESPECIE ,AVG(B.PESO) PESOMEDIO
+FROM ANIMAL A,(
+                SELECT A.IDANIMAL ANIMAL, A.PESO PESO
+                FROM ANIMAL A)B
+WHERE B.ANIMAL=A.IDANIMAL
+GROUP BY A.ESPECIE
+
+/*************************************************************/
+/* 2.Obtener el identificador del animal y su peso para los  */
+/* animales que pertenezcan a la especie 'TORO' y su peso    */
+/* sea superior a la media de los pesos de su especie,       */
+/* ordenados de mayor a menor peso.                          */
+/* ************************************************************/
+
+SELECT A.IDANIMAL, A.PESO
+FROM ANIMAL A, (SELECT AVG(A.PESO) PESOMEDIO
+                FROM ANIMAL A
+                WHERE A.ESPECIE=('TORO'))B
+WHERE A.PESO>B.PESOMEDIO
+AND A.ESPECIE=('TORO')
+ORDER BY A.PESO DESC
+
+/* ***********************************************************/
+/* 3. Identificador de animal,especie, peso y peso medio de */
+/* su especie para todos los animales con un peso superior  */
+/* al peso medio de su especie, ordenados por especie y peso*/
+/* descendente                                              */
+/* ***********************************************************/
+
+SELECT A.IDANIMAL, a.especie, A.PESO,round(d.pesomedio,2) PESOMEDIO
+FROM ANIMAL A,(SELECT AVG(A.PESO) PESOMEDIO, E.NOMBRE especie
+                            FROM ANIMAL A, ESPECIE E
+                            WHERE A.ESPECIE=E.NOMBRE
+                            GROUP BY E.NOMBRE)D
+WHERE A.PESO>D.PESOMEDIO
+AND A.ESPECIE=d.especie
+ORDER BY a.especie,A.PESO DESC
+
+/* *********************************************************/
+/* 5. Obtener los nombres de los nutrientes aportados por */
+/* la dieta 4. En el listado no podran aparecer repetido  */
+/* el nombre de los nutrientes.                           */
+/* *********************************************************/
+
+SELECT DISTINCT N.NOMBRE
+FROM COMPOSICIONALIMENTO CA, ALIMENTO A, NUTRIENTE N, (SELECT A.IDALIMENTO ALIMENTO
+                                                        FROM DIETA D, DESCRIPCIONDIETA DD, ALIMENTO A
+                                                        WHERE D.IDDIETA=4
+                                                        AND D.IDDIETA=DD.IDDIETA
+                                                        AND DD.IDALIMENTO=A.IDALIMENTO)B
+WHERE A.IDALIMENTO=B.ALIMENTO
+AND CA.IDALIMENTO=A.IDALIMENTO
+AND CA.IDNUTRIENTE=N.IDNUTRIENTE
+
+OTRA FORMA
+
+SELECT DISTINCT N.NOMBRE
+FROM  DESCRIPCIONDIETA DD, NUTRIENTE N,COMPOSICIONALIMENTO CA
+WHERE DD.IDALIMENTO=CA.IDALIMENTO
+AND CA.IDNUTRIENTE=N.IDNUTRIENTE
+AND DD.IDDIETA=4
+                                      
+/* **********************************************************/
+/* 6. Indicar el alimento y la cantidad total que se toma  */
+/* de el para los alimentos ingeridos en la dieta 2. Notar */
+/* que un mismo alimento se puede ingerir en distintas     */
+/* tomas.                                                  */
+/* **********************************************************/
+
+SELECT A.NOMBRE, SUM(B.CANTIDAD)
+FROM ALIMENTO A, (SELECT A.IDALIMENTO ALIMENTO,DD.CANTIDADTOMA  CANTIDAD
+                    FROM DIETA D, DESCRIPCIONDIETA DD, ALIMENTO A
+                    WHERE D.IDDIETA=2
+                    AND D.IDDIETA=DD.IDDIETA
+                    AND DD.IDALIMENTO=A.IDALIMENTO)B
+WHERE A.IDALIMENTO=B.ALIMENTO 
+GROUP BY A.NOMBRE
+               
+
+/************************************************************/
+/* 7. Listar el nombre del alimento y su precio, para los   */
+/* alimentos que contengan 'RIBOFLAVINA' en su composicion  */
+/* ordenados por el coste.                                  */
+/* ***********************************************************/
+
+SELECT A.NOMBRE, A.COSTE
+FROM ALIMENTO A,(SELECT A.IDALIMENTO ALIMENTO
+                 FROM ALIMENTO A, COMPOSICIONALIMENTO CA, NUTRIENTE N
+                 WHERE A.IDALIMENTO=CA.IDALIMENTO
+                 AND N.IDNUTRIENTE=CA.IDNUTRIENTE
+                 AND N.NOMBRE=('RIBOFLAVINA'))B
+WHERE A.IDALIMENTO=B.ALIMENTO
+ORDER BY A.COSTE
+
+/*************************************************************/
+/* 8. Incrementar el precio de los alimentos en un 5% para   */
+/* aquellos alimentos que contengan el nutriente 3 en su     */
+/* composicion.                                              */
+/* ************************************************************/
+
+UPDATE ALIMENTO SET COSTE=ALIMENTO.COSTE*1.05
+WHERE ALIMENTO.IDALIMENTO IN(SELECT A.IDALIMENTO
+                            FROM ALIMENTO A, COMPOSICIONALIMENTO CA, NUTRIENTE N
+                            WHERE N.IDNUTRIENTE=3
+                            AND CA.IDNUTRIENTE=N.IDNUTRIENTE
+                            AND CA.IDALIMENTO=A.IDALIMENTO)
+
+/****************************************************************/
+/* 9a. La granja ha adquirido un nuevo alimento. Sus caracte-   */
+/* rísticas son: IDALIMENTO=6, NOMBRE='PIENSOACME', y su coste  */
+/* es de 3500. Insertar el nuevo alimento en su tabla           */
+/****************************************************************/
+
+INSERT INTO ALIMENTO (IDALIMENTO,NOMBRE,COSTE) VALUES (6,'PIENSOACME',3500)
+
+/**************************************************************/
+/* 9b. La composición de este alimento es idéntica a la del   */
+/* alimento 2, pero con distinta cantidad en la composicion de*/
+/* los nutrientes. Generar mediante una única insercion las   */
+/* filas de la tabla composicionalimento para este nuevo    */
+/* alimento sin especificar la cantidad contenida.            */
+/**************************************************************/
+
+INSERT INTO COMPOSICIONALIMENTO (IDALIMENTO,IDNUTRIENTE) 
+SELECT DECODE (IDALIMENTO,2,6)IDALIMENTO,IDNUTRIENTE
+FROM COMPOSICIONALIMENTO
+WHERE IDALIMENTO=2
+
+/**************************************************************/
+/* 10. Identificar los idnutriente que le falta al animal 1   */
+/* en su dieta. Si no le faltara ninguno la consulta no gene- */
+/* raria ninguna fila.                                        */
+/* *************************************************************/
+
+select distinct n.idnutriente
+from animal a, especie e, necesidadesnutriente nn, nutriente n
+where e.nombre=(select a.especie
+                from animal a
+                where a.idanimal=1)
+and e.nombre=nn.especie
+and nn.idnutriente=n.idnutriente
+and n.idnutriente not in(select distinct n.idnutriente
+                            from composicionalimento ca, nutriente n,(select ali.idalimento alimento
+                                                                        from dieta d,descripciondieta dd, alimento ali ,(select a.dietaactual
+                                                                                                                        from animal a
+                                                                                                                        where a.idanimal=1)a
+                                                                        where a.dietaactual=d.iddieta
+                                                                        and d.iddieta=dd.iddieta
+                                                                        and dd.idalimento=ali.idalimento)b
+                            where b.alimento=ca.idalimento
+                            and n.idnutriente=ca.idnutriente) 
+
+/**************************************************************/
+/* 11. Identificador de animal y especie,para animales        */
+/* que han cambiado mas de una vez de dieta.                  */
+/**************************************************************/
+
+select a.idanimal, e.nombre
+from animal a, especie e, (select hd.idanimal animal,count(hd.iddieta) numerodecambiosdieta
+                            from historialdietas hd
+                            group by hd.idanimal)b
+where a.idanimal=b.animal
+and a.especie=e.nombre
+and b.numerodecambiosdieta>1
+
+/**************************************************************/
+/* 12. Hora de inicio, alimento y cantidad para las tomas     */
+/* de la dieta 1.                                             */
+/* *************************************************************/
+
+SELECT TO_CHAR(HORAINICIO,'HH24:MI')HORA,NOMBRE,CANTIDADTOMA
+FROM DESCRIPCIONDIETA E,TOMA T, ALIMENTO A
+WHERE E.IDTOMA=T.IDTOMA
+AND A.IDALIMENTO=E.IDALIMENTO
+AND E.IDDIETA=1
+ORDER BY HORA
+
+/* **************************************************************/
+/* ESPECIE Y NUMERO DE CAMBIOS POR INDIVIDIO DE LA ESPECIE.  (DIVIDIR NUMERO DE CAMBIOS DE UNA ESPECIE       */                                                                                                                              POR EL TOTAL DE INDIVIDUOS DE LA ESPECIE             */
+/* **************************************************************/
+
+ select b.especie, (b.numeroanimalesporespecie/c.numerodecambiosdieta) cambioporespecie
+ from (select a.especie especie,count(a.idanimal) numeroanimalesporespecie
+       from animal a
+       group by a.especie)b,
+       (select a.especie especie,count(hd.iddieta) numerodecambiosdieta
+        from animal a,historialdietas hd
+        where a.idanimal=hd.idanimal
+        group by a.especie)c
+ where b.especie=c.especie
+
+
+/* ESPECIE Y PORCENTAJE DE INDIVIDUOS DE ESA ESPECIE QUE HA CAMBIADO DE DIETA  */
+/* DIVIDIR LOS BICHOS DE UNA ESPECIE QUE HAN CAMBIADO DE DIETA POR EL TOTAL DE BICHOS DE ESA ESPECIE*/
+
+select  b.especie, NVL(round((c.animaleshancambiado/b.numeroanimalesporespecie*100),2),0)porcentajedecambioporespecie
+from    (select a.especie especie,count(a.idanimal) numeroanimalesporespecie
+        from animal a
+        group by a.especie)b left join
+        (select count(a.animal)animaleshancambiado,a.especie especie
+        from  (select distinct a.idanimal animal, a.especie especie
+                from animal a,historialdietas hd
+                where a.idanimal=hd.idanimal)a
+        group by a.especie)c
+on  b.especie=c.especie
+
+/* ************************************************************/
+-- DIETA QUE MAYOR CANTIDAD DE HARINA CARNICA 
+-- APORTA 
+select dd.iddieta dieta,sum(dd.cantidadtoma) canatidadquetoma
+from descripciondieta dd,(select a.idalimento alimento 
+                          from alimento a
+                          where a.nombre='HARINA CARNICA')a
+where dd.idalimento=a.alimento
+group by dd.iddieta
+having sum(dd.cantidadtoma)=(select max(sum(dd.cantidadtoma)) mxcantidad
+                            from descripciondieta dd,(select a.idalimento alimento 
+                                                      from alimento a
+                                                      where a.nombre='HARINA CARNICA')a
+                            where dd.idalimento=a.alimento
+                            group by iddieta)
+
+/* **********************************************************************************************/						  
+-- NUTRIENTES PARA LOS QUE NO TENGAMOS NINGUN ALIMENTO
+-- QUE LOS CONTENGAN
+
+select n.idnutriente,n.nombre
+from nutriente n
+where n.idnutriente not in (select distinct ca.idnutriente
+                            from composicionalimento ca)
+
+-- ANIMALES QUE TENGAN LAS MISMAS NECESIDADES
+-- QUE EL ANIMAL 5
+
+SELECT DISTINCT A.IDANIMAL, A.ESPECIE
+FROM ANIMAL A,
+        (SELECT NN.ESPECIE ESPECIE,NN.IDNUTRIENTE NUTRIENTE
+        FROM NECESIDADESNUTRIENTE NN, (SELECT DISTINCT E.NOMBRE ESPECIE
+                                        FROM ANIMAL A, ESPECIE E
+                                        WHERE A.ESPECIE=E.NOMBRE
+                                        AND A.IDANIMAL=5)B
+        WHERE NN.ESPECIE=B.ESPECIE)C,
+        (SELECT NN.ESPECIE ESPECIE,NN.IDNUTRIENTE NUTRIENTE
+        FROM NECESIDADESNUTRIENTE NN, (SELECT DISTINCT E.NOMBRE ESPECIE
+                                        FROM ANIMAL A, ESPECIE E
+                                        WHERE A.ESPECIE=E.NOMBRE)B
+        WHERE NN.ESPECIE=B.ESPECIE)D
+WHERE C.ESPECIE=D.ESPECIE
+AND A.ESPECIE=C.ESPECIE
+
+-- DIETA O DIETAS MAS VARIADA 
+--(MAYOR NUMERO DE NUTRIENTES INCORPORA A LA DIETA)
+

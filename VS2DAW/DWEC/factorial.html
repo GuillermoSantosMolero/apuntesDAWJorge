@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>Factorial de un numero</title>
+		<script>
+		var x = function fac(num){ 
+			var factorial=1;
+			if(num!=1){
+				factorial=fac(num-1);
+			}
+			return num*factorial;
+		};
+		</script>
+	</head>
+	<body>
+		<h1>Factorial de un numero</h1><br />
+		<h3>Introduce un numero</h3><br />
+		Numero <input id="numero" type="text" value="" /><br /><br />
+		<input type="button" value="Factorial" onclick="var valor=parseInt(numero.value);
+		(valor<5 || valor>20) ? alert ('Valor fuera de rango (5..20)'):
+		alert(x(parseInt(numero.value)))" />
+	</body>
+</html>
+	

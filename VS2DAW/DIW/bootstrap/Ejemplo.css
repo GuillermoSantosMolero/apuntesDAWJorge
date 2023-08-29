@@ -1,0 +1,6 @@
+/* .container,*/
+.container-fluid{ 
+    background-color: skyblue;
+    height: 400px;
+    text-align: center;
+}

@@ -1,0 +1,77 @@
+body{
+    background: rgba(102,135,4,1);
+background: -moz-linear-gradient(left, rgba(102,135,4,1) 0%, rgba(126,189,39,1) 56%, rgba(145,232,66,1) 100%);
+background: -webkit-gradient(left top, right top, color-stop(0%, rgba(102,135,4,1)), color-stop(56%, rgba(126,189,39,1)), color-stop(100%, rgba(145,232,66,1)));
+background: -webkit-linear-gradient(left, rgba(102,135,4,1) 0%, rgba(126,189,39,1) 56%, rgba(145,232,66,1) 100%);
+background: -o-linear-gradient(left, rgba(102,135,4,1) 0%, rgba(126,189,39,1) 56%, rgba(145,232,66,1) 100%);
+background: -ms-linear-gradient(left, rgba(102,135,4,1) 0%, rgba(126,189,39,1) 56%, rgba(145,232,66,1) 100%);
+background: linear-gradient(to right, rgba(102,135,4,1) 0%, rgba(126,189,39,1) 56%, rgba(145,232,66,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#668704', endColorstr='#91e842', GradientType=1 );
+}
+.fila1{
+    background-color: #01CF3F ;
+    height: 6em;
+    margin: 0.5em 1em;
+    align-items: center;
+    padding: 1em;
+}
+.fila2{
+    background-color: green;
+    margin: 0.5em 1em;
+}
+.fila3{
+    background-color: white;
+    margin: 2em 0em;
+    align-items: center;
+}
+.clipestilo{
+    height: 2em;
+    width: 4em;
+}
+.fctestilo{
+    height: 6em;
+    width: 16em;
+}
+.fila2-1{
+    padding: 1em;
+    padding-left: 2em;
+    color: white;
+}
+.fila2-2{
+    padding: 1em;
+}
+.fieldset{
+    border: 0.1em white solid;
+    height: 100%;
+    width: 100%;
+    padding: 1em;
+}
+input{
+    margin: 0.5em 0em;
+    width: 100%;
+}
+.confirmar{
+    width: auto;
+    background-color: grey;
+    color: white;
+    border: 0.1em red solid;
+}
+.fila3-1{
+    text-align: center;
+}
+.fila3-3, .fila3-2, .fila3-4{
+    justify-items: center;
+    align-items: center;
+}
+.uned{
+    height: 4em;
+    width: 8em;
+}
+.clm{
+    height: 4em;
+    width: 6em;
+}
+.azarquiel{
+    height: 4em;
+    width: 4em;
+}

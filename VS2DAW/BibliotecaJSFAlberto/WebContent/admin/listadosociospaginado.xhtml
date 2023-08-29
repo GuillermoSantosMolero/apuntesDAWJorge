@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/WEB-INF/plantillas/plantilla.xhtml">
+<ui:define name="title">lista socios paginado</ui:define>
+<ui:define name="contenido">
+	
+<h:messages globalOnly="true" layout="table" infoClass="advertencia"></h:messages>
+	
+<h:panelGroup id="panelTab" styleClass="panelTabla"	rendered="#{backingSocio.paginacion.itemsCount>0}" layout="block">
+			
+<h:form id="frmlistadosociospaginado" prependId="false">
+				
+<div class="navegacionTabla">
+
+	<h:outputText value="Mostrando #{backingSocio.paginacion.primerElementoPagina}..#{backingSocio.paginacion.ultimoElementoPagina} de #{backingSocio.paginacion.itemsCount}" />
+					
+	<h:commandLink id="anterior" value="Anterior" rendered="#{backingSocio.paginacion.hayPaginaAnterior}">
+	
+		<f:ajax execute="@form" render="@form" listener="#{backingSocio.paginaAnterior}" />
+		
+	</h:commandLink>
+					
+	<h:commandLink id="siguiente" value="Siguiente" rendered="#{backingSocio.paginacion.hayPaginaSiguiente}">
+	
+		<f:ajax execute="@form" render="@form" listener="#{backingSocio.paginaSiguiente}" />
+	
+	</h:commandLink>
+					
+	<h:selectOneMenu id="slctpaginacion" value="#{backingSocio.slctnrpag}">
+		<f:selectItem itemLabel="5" itemValue="5" />
+		<f:selectItem itemLabel="10" itemValue="10" />
+		<f:selectItem itemLabel="15" itemValue="15" />
+		<f:selectItem itemLabel="20" itemValue="20" />
+		<f:ajax listener="#{backingSocio.resetPaginacion}" render="@form" />
+	</h:selectOneMenu>
+					
+</div>
+
+<h:dataTable styleClass="tabla" id="tablasocios" var="socio"
+			 rendered="#{not empty backingSocio.listSocios}"
+			 value="#{backingSocio.listSocios}" border="1"
+			 headerClass="list-header" rowClasses="filaimpar,filapar"
+			 columnClasses="just-derecha,just-izquierda,just-izquierda,just-centro">
+			 		 
+	<f:facet name="header"><h:outputText value="Listado deSocios"></h:outputText></f:facet>
+	
+	<h:column id="IdSocio">
+		<f:facet name="header"><h:outputText value="IdSocio"></h:outputText></f:facet>
+		<h:outputText value="#{socio.idsocio}"></h:outputText>
+	</h:column>
+	
+	<h:column id="Nombre">
+		<f:facet name="header"><h:outputText value="Nombre"></h:outputText></f:facet>
+		<h:outputText value="#{socio.nombre}"></h:outputText>
+	</h:column>
+	
+	<h:column id="Direccion">
+		<f:facet name="header"><h:outputText value="Direccion"></h:outputText></f:facet>
+		<h:outputText value="#{socio.direccion}"></h:outputText>
+	</h:column>
+	
+	<h:column id ="Editar" headerClass="list-header">
+		<f:facet name="header"><h:outputText value=""></h:outputText></f:facet>
+		<h:commandLink action="#{backingSocio.editarSocio}" value="Editar">
+			<f:setPropertyActionListener value="#{socio}" target="#{backingEditarSocio.socioseleccionado}">
+			</f:setPropertyActionListener>
+		</h:commandLink>
+	</h:column>
+	
+</h:dataTable>
+				
+<div>
+	<h:outputText id="pagactual" value="Pagina:#{backingSocio.paginacion.pagina}"></h:outputText>
+	<h:outputText id="regpag" value="Registros por pagina: #{backingSocio.paginacion.nrpag}"></h:outputText>
+</div>	
+	
+</h:form>
+</h:panelGroup>	
+</ui:define>
+</ui:composition>
+</html>

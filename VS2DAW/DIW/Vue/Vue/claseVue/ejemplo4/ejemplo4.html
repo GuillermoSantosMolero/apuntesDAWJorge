@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CURSO VUE</title>
+    <link rel="stylesheet" href="../../bootstrap.css">
+</head>
+<div id="app" class="container mt-5">
+    <h1>Bootstrp</h1>
+    <div :class="['p-3','text-white',fondo]">
+        <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+            Laboriosam quibusdam, eos deserunt reprehenderit nihil mollitia facere aperiam nesciunt non velit, 
+            sunt debitis quia quasi beatae molestias obcaecati iste nam. Sunt.
+        </p>
+        <input type="text" v-model="fondo">
+    </div>
+
+    <div class="text-black p-3" :class="[fondo2]"><!-- {'bg-warning':color,'bg-info':!color} -->
+        <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+            Laboriosam quibusdam, eos deserunt reprehenderit nihil mollitia facere aperiam nesciunt non velit, 
+            sunt debitis quia quasi beatae molestias obcaecati iste nam. Sunt.
+        </p>
+        <input type="radio" v-model="fondo2" name="fondo2" value="bg-primary">Primario
+        <input type="radio" v-model="fondo2" name="fondo2" value="bg-success">Correcto
+        <input type="radio" v-model="fondo2" name="fondo2" value="bg-warning">Aviso
+        <input type="radio" v-model="fondo2" name="fondo2" value="bg-danger">Cuidado
+    </div>
+    <div class="text-black p-3" :class="{'bg-warning':color,'bg-info':!color}">
+        <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+            Laboriosam quibusdam, eos deserunt reprehenderit nihil mollitia facere aperiam nesciunt non velit, 
+            sunt debitis quia quasi beatae molestias obcaecati iste nam. Sunt.
+        </p>
+        <button class="btn btn-primary mt-3" @click="color=!color">Cambiar</button>
+    </div>
+</div>
+<script src="../../vue.js"></script>
+<script src="ejemplo4.js"></script>
+</html>

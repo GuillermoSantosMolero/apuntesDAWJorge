@@ -1,0 +1,11 @@
+.cssgradients .foo {
+  background: -webkit-linear-gradient(top, #c9de96 0%, #8ab66b 44%, #398235 100%);
+  background: -moz-linear-gradient(top, #c9de96 0%, #8ab66b 44%, #398235 100%);
+  background: linear-gradient(top, #c9de96 0%, #8ab66b 44%, #398235 100%);
+}
+
+.no-cssgradients .foo {
+  background: #c9de96;
+}
+
+/*# sourceMappingURL=ejrepasocarlos7.css.map */

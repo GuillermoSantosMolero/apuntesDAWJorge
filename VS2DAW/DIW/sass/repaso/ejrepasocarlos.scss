@@ -1,0 +1,262 @@
+///Ejercicio 1
+// a {
+//   text-decoration: none;
+//   :hover {
+//     text-decoration: underline;
+//   }
+// }
+
+///ejercicio 2
+// nav {
+//   ul {
+//     margin: 0;
+//     padding: 0;
+//     list-style: none;
+//   }
+//   li {
+//     display: inline-block;
+//   }
+//   a {
+//     display: block;
+//     padding: 6px 12px;
+//     text-decoration: none;
+//   }
+// }
+
+///ejercicio 3
+// .success {
+//     border: 1px solid #ccc;
+//     padding: 10px;
+//     color: #333;
+//     border-color: green;
+//   }
+//   .error {
+//     @extend .success;
+//     border-color: red;
+//   }
+
+//   .warning {
+//     @extend .success;
+//     border-color: yellow;
+//   }
+
+///ejercicio 4
+// $mapa:(1:darkorange,2:royalblue,3:springgreen);
+// @each $h,$var in $mapa {
+//     h#{$h}{
+//         color: $var;
+//     }
+// }
+
+///ejercicio 5
+// @mixin name($tam) {
+//   -webkit-border-radius: $tam;
+//   -moz-border-radius: $tam;
+//   -ms-border-radius: $tam;
+//   border-radius: $tam;
+// }
+// .box-square{
+//     @include name(0);
+// }
+// .box-rounded{
+//     @include name(10);
+// }
+
+///ejercicio 6
+// $mapa: (
+//   family: arial,
+//   weight: bold,
+//   size: 2em
+// );
+// .foo {
+//   @each $h, $var in $mapa {
+//     font-#{$h}: $var;
+//   }
+// }
+
+///ejercicio 7
+// $var:top, #c9de96 0%, #8ab66b 44%, #398235 100%;
+// $mapa:(-webkit-linear,-moz-linear,linear);
+// .cssgradients .foo {
+//     @each $h in $mapa {
+//         background: #{$h}-gradient($var);
+//     }
+// }
+// .no-cssgradients .foo {
+//     background: #c9de96;
+// }
+
+///ejercicio 8
+// .foo{
+//     .awesome{
+//         .class{
+//             .amazing{
+//                 .things{
+//                     background: orange;
+//                     .no-foo &{
+//                         background: green;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+
+///ejercicio 9
+// .infobox {
+//     width: 200px;
+//     .message{
+//         border: 1px solid red;
+//         .title {
+//             color: red;
+//         }
+//     }
+//     .user {
+//         border: 2px solid black;
+//         .title {
+//             color: black;
+//         }
+//     }
+// }
+
+///ejercio10
+// .infobox {
+//     color: blue;
+//     .user &{
+//         color: gray;
+//     }
+// }
+// .message {
+//     color: gray;
+//     .user .infobox &{
+//         content: "Selector is '.user .infobox .message'";
+//     }
+// }
+// .message.new {
+//     color: red;
+// }
+
+///ejercicio11
+// @import "_color";
+// @import "width";
+// #page {
+//   color: $main_color;
+//   width: $main_width;
+// }
+// #sidebar {
+//   color: darken($main_color, 10%);
+//   width: $main_width * 0.2;
+// }
+
+///ejercicio 13
+// @mixin clase($tam) {
+//   color: #336699;
+//   font-family: helvetica, arial, sans-serif;
+//   font-size: $tam;
+//   font-variant: small-caps;
+// }
+// .product_title{
+//     @include clase(20px);
+// }
+// .product_title{
+//     @include clase(100px);
+// }
+
+///ejercicio 14
+// @import "mixinej14";
+// .clase{
+//     @include rounded_borders(black);
+// }
+
+///ejercicio 15
+// @import "_browser-opacity.scss";
+// .h1 {
+//   @include opacity(60);
+// }
+
+///ejercicio 16
+// $mapacoches: (
+//   volvo: green,
+//   corvette: red,
+//   bmw: black
+// );
+// @each $car, $color in $mapacoches {
+//   .car .#{$car}_make {
+//     color: $color;
+//     width: 100px;
+//     .image{
+//         background: url("images/#{car}/#{$color}.png");
+//     }
+//   }
+// }
+
+///ejercicio 17
+// @mixin country_color($country) {
+//   @if $country == france {
+//     color: blue;
+//   } @else if $country == spain {
+//     color: yellow;
+//   } @else if $country == italy {
+//     color: green;
+//   } @else {
+//     color: red;
+//   }
+// }
+// .england {
+//   @include country_color(england);
+// }
+// .france {
+//   @include country_color(france);
+// }
+
+///ejercicio 18
+// @mixin clase($color,$background) {
+//   margin: 0 0 20px 0;
+//   font-family: Jubilat, Georgia, serif;
+//   font-size: 20px;
+//   font-weight: bold;
+//   text-transform: uppercase;
+//   color: $color;
+//   background: $background;
+// }
+// section.main h2 {
+//     @include clase(#c63,#eee );
+// }
+// section.secondary h3{
+//     @include clase(#39c,#333 );
+// }
+
+///ejercicio 19
+// @mixin clase($tam) {
+//   float: left;
+//   margin: 0 10px 0 0;
+//   padding: 4px;
+//   border: 1px solid #ddd;
+//   -webkit-border-radius: $tam;
+//   -moz-border-radius: $tam;
+//   border-radius: $tam;
+// }
+// ol.slats li a img {
+//   @include clase(3px);
+// }
+// div.module {
+//   @include clase(10px);
+// }
+
+///ejercicio 20
+@mixin rounded($tam){
+    -webkit-border-radius: $tam;
+    -moz-border-radius: $tam;
+    border-radius: $tam;
+}
+@mixin shadow($tam,$tam2,$tam3,$color){
+    -webkit-box-shadow: $tam,$tam2,$tam3,$color; 
+	-moz-box-shadow: $tam,$tam2,$tam3,$color; 
+	box-shadow: $tam,$tam2,$tam3,$color;
+}
+div.module {
+  padding: 20px;
+  background: #eee;
+  @include rounded(10px);
+  @include shadow(0, 1px, 2px, rgba(0, 0, 0, 0.5));
+}

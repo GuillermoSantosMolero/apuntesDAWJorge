@@ -1,0 +1,41 @@
+html {
+  min-height: 100%;
+  position: relative;
+}
+body {
+	background-color: #DBC493;
+	font-family:Verdana, Geneva, sans-serif;
+	margin: 0 0 40px;
+}
+
+header {
+    margin-right:auto;
+    margin-left:auto;
+    width: 1154px; 
+}
+#logo{
+	margin-top:-10px;
+}
+#menu{
+	font-size: 16px;
+    margin-top:20px;
+	margin-right: auto;
+	margin-left: auto;
+	width: 640px;
+}
+#contenido{
+	margin-right: auto;
+	margin-left: auto;
+	background-color: #C5B26D;
+	width: 640px;
+	font-size: 24px;
+
+}
+#footer{
+	text-align:center;
+    width: 100%;
+    bottom: 0;
+    position:absolute;
+    height: 40px;
+}
+

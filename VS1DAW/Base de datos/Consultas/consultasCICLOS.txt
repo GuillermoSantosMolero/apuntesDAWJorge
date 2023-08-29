@@ -1,0 +1,121 @@
+
+/* **************************************************************/
+/* 1.sin edad LISTADO EN EL QUE APAREZCA EL NOMBRE DEL INSTITUTO       */
+/* DE PROCEDENCIA,EL NOMBRE EL ESTUDIANTE Y SU EDAD(EN AÑOS)   */
+/* ORDENADO POR NOMBRE DEL INSTITUTO DE PROCEDENCIA Y EDAD     */
+/* **************************************************************/
+
+SELECT IES.nombre IESDEPROCEDENCIA,ESTUDIANTE.nombre ESTUDIANTE
+FROM ESTUDIANTE, IES
+WHERE estudiante.ies_de_procedencia=ies.idies
+
+
+/* *******************************************************************/
+/* 2.NOMBRE DEL CICLO Y TOTAL DE PLAZAS OFERTADAS, INDEPENDIENTE-   */
+/*    MENTE DEL INSTITUTO Y TURNO EN QUE SE OFERTEN, PARA LOS CICLOS */
+/*    QUE OFERTEN MAS DE 5 PLAZAS, ORDENADO POR EL NUMERO DE        */
+/*    PLAZAS OFERTADAS DE MAYOR A MENOR.                            */
+/* *******************************************************************/
+
+SELECT c.nombre , oe.plazas
+FROM ciclo c, ofertaeducativa oe
+WHERE c.idciclo=oe.idciclo
+AND oe.plazas>5
+ORDER BY oe.plazas DESC
+
+/* *********************************************************************/
+/* 3. ESTUDIANTES QUE HAYAN SOLICITADO EL CICLO DE 'IMAGEN Y SONIDO'  */
+/* *********************************************************************/
+
+SELECT ESTUDIANTE.nombre ESTUDIANTE
+FROM ESTUDIANTE, CICLO, SOLICITA
+WHERE solicita.idestudiante=estudiante.idestudiante
+AND solicita.idciclo=ciclo.idciclo
+AND ciclo.nombre LIKE ('IMAGEN Y SONIDO')
+
+/* ***********************************************************************/
+/* 4. NOMBRE DEL ESTUDIANTE, NOMBRE DEL INSTITUTO, NOMBRE DEL CICLO Y   */
+/*    TURNO, PARA LA PRIMERA PREFERENCIA EN LA SOLICITUD DE CADA UNO    */
+/*    DE LOS ESTUDIANTES.                                               */
+/* ***********************************************************************/
+
+SELECT ESTUDIANTE.nombre ESTUDIANTE, IES.nombre IES, CICLO.nombre CICLO, TURNO.descripcion TURNO
+FROM ESTUDIANTE,IES,CICLO,TURNO,SOLICITA
+WHERE solicita.idestudiante=estudiante.idestudiante
+AND solicita.idies=ies.idies
+AND solicita.idciclo=ciclo.idciclo
+AND solicita.turno=turno.idturno
+ORDER BY solicita.preferencia
+
+/* ***********************************************************************/
+/* 5. NOMBRE DEL ESTUDIANTE, NOMBRE DEL INSTITUTO,NOMBRE DEL CICLO Y    */ 
+/*    TURNO, PARA LOS ESTUDIANTES QUE HAN CONSEGUIDO ENTRAR EN EL CICLO */
+/*    INSTITUTO Y TURNO QUE SOLICITARON CON PREFERENCIA 1               */
+/*   ********************************************************************/
+
+SELECT ESTUDIANTE.nombre ESTUDIANTE, IES.nombre IES, CICLO.nombre CICLO, TURNO.descripcion TURNO
+FROM ESTUDIANTE,IES,CICLO,TURNO,SOLICITA,ASIGNACION
+WHERE solicita.idestudiante=estudiante.idestudiante
+AND solicita.idestudiante=asignacion.idestudiante
+AND solicita.idies=ies.idies
+AND solicita.idies=asignacion.idies
+AND solicita.idciclo=ciclo.idciclo
+AND solicita.idciclo=asignacion.idciclo
+AND solicita.turno=turno.idturno
+AND solicita.turno=asignacion.turno
+AND solicita.preferencia=1
+
+/********************************************************************/
+/* 6. CONSULTA QUE MUESTRE EL NOMBRE DE LOS CICLOS PARA LOS QUE */
+/*    NO HAY NINGUNA SOLICITUD.                                 */
+/* ***************************************************************/
+
+
+
+/* *****************************************************************/
+/* 7.NO CONSULTA EN LA QUE APAREZCA EL NOMBRE DEL CICLO Y EL NUMERO */
+/*   DE SOLICITUDES PRESENTADAS PARA ENTRAR EN EL, INDEPENDIENTE- */
+/*   MENTE DEL INSTITUTO QUE OFERTE LAS PLAZAS.                   */
+/******************************************************************/
+
+/********************************************************************/
+/* 8. LISTADO EN EL QUE APAREZCA EL NOMBRE DEL INSTITUTO,NOMBRE DEL */
+/*    CICLO QUE OFERTA, TURNO Y NUMERO DE PLAZAS OFERTADAS          */
+/*    ORDENADO POR NOMBRE DE INSTITUTO.                             */
+/* *******************************************************************/
+
+SELECT ies.nombre IES, ciclo.nombre CICLO, turno.descripcion TURNO, oe.plazas
+FROM IES, CICLO, TURNO, OFERTAEDUCATIVA OE
+WHERE oe.idies=ies.idies
+AND oe.idciclo=ciclo.idciclo
+AND oe.turno=turno.idturno
+ORDER BY ies.nombre
+
+/* *******************************************************************/
+--  9. INSTITUTO,EL NOMBRE DEL ESTUDIANTE QUE HA CONSEGUIDO PLAZA EN EL, 
+--	   SU  NOTA MEDIA, EL NOMBRE DEL CICLO Y TURNO EN EL QUE HA CONSE-   */
+--	   GUIDO LA PLAZA. 
+/* *******************************************************************/
+
+SELECT ies.nombre IES,estudiante.nombre ESTUDIANTE, estudiante.notamedia NOTAMEDIA ,ciclo.nombre CICLO, turno.descripcion TURNO
+FROM IES, CICLO, TURNO, ESTUDIANTE, ASIGNACION
+WHERE asignacion.idies=ies.idies
+AND asignacion.idestudiante=estudiante.idestudiante
+AND asignacion.idciclo=ciclo.idciclo
+AND asignacion.turno=turno.idturno
+
+/* 10.no NOMBRE DEL INSTITUTO, NOMBRE DEL CICLO, TURNO PLAZAS OFERTADAS */
+/* Y PLAZAS SOLICITADAS ORDENADO POR INSTITUTO */
+/* ************************************************************************************/
+
+/* ********************************************************************/
+--  11. NOMBRE DEL ESTUDIANTE,IES DE PROCEDENCIA, NOTAMEDIA, EDAD        
+--  PARA LOS ESTUDIANTES QUE HAYAN SOLICITADO ALGUN CICLO EN EL      
+--  IES AZARQUIEL                                                    
+/* ******************************************************************/
+
+SELECT e.nombre , e.ies_de_procedencia, e.notamedia 
+FROM ESTUDIANTE E, IES, SOLICITA S
+WHERE e.idestudiante=s.idestudiante
+AND s.idies=ies.idies
+AND ies.nombre LIKE ('%AZARQUIEL%')

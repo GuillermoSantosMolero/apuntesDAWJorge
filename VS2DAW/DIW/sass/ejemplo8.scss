@@ -1,0 +1,23 @@
+@mixin centrado{
+    margin: 0px auto;;
+}
+.container{
+    @include centrado;
+    color: blue;
+}
+@mixin enlace{
+    a{
+        background-color: yellow;
+        font-style: italic;
+    }
+}
+@include enlace;
+
+@mixin centrar-menu {
+    @include centrado;
+    background-color: yellowgreen;
+    color: white;
+}
+.main-menu{
+    @include centrar-menu;
+}

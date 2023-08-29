@@ -1,0 +1,29 @@
+header{
+    border: 0.2em black solid;
+    margin-left:10% ;
+    width: 80%;
+    margin-bottom: 5%;
+}
+.container{
+    margin: 0% 10%;
+    width: 100%;
+}
+.header{
+    border-bottom: 0.2em black solid;
+    height: auto;
+    text-align: center;
+}
+.headerbottom{
+    height: 3em;
+}
+.texto{
+    border: 0.2em black solid;
+    width: 40em;
+    height: 30em;
+}
+.fila1{
+    height: 30em;
+    width: 100%;
+    align-items: center;
+    justify-items: center;
+}

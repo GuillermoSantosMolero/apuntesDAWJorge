@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>Juego tortuga conejo</title>	 
+		<style>
+			#container{
+				display: flex;
+			}
+			#zc,#zt,#t2,#t3,#t4,#t5,#t6,#c2,#c3,#c4,#c5,#c6 {
+				visibility: hidden;
+			}
+			#1{
+				width: 85%;
+			}
+			#2{
+				width: 15%;
+			}
+			table,tr,td{
+			 border: 0.05em black solid;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Juego de la tortuga y el conejo</h1><br/>
+		<div id="container">
+			<div id="1">
+			<table>
+				<tr>
+					<td><img id="c1" src="../img/conejo.png" width="150px" height="200px"></img><br /></td>
+				</tr>
+				<tr>
+					<td><img id="t1" src="../img/tortuga.jpg" width="150px" height="200px"></img></td>
+					<td><img id="t2" src="../img/tortuga.jpg" width="150px" height="200px"></img></td>
+					<td><img id="t3" src="../img/tortuga.jpg" width="150px" height="200px"></img></td>
+					<td><img id="t4" src="../img/tortuga.jpg" width="150px" height="200px"></img></td>
+					<td><img id="t5" src="../img/tortuga.jpg" width="150px" height="200px"></img></td>
+					<td><img id="t6" src="../img/tortuga.jpg" width="150px" height="200px"></img></td>
+				</tr>
+			</table>
+			
+			</div>
+			<div id="2">
+				<img id="zanahoria" src="../img/zanahoria.jpg" width="100px" height="100px" align="center"></img>
+				<img id="zc" src="../img/zanahoriaconejo.jpg" width="150px" height="200px" align="center"></img>
+				<img id="zt" src="../img/zanahoriatortuga.jpg" width="150px" height="200px" align="center"></img>
+
+			</div>
+		</div>
+		<input type="button" id="jugar" value="Jugar" onclick="juego()"/>
+		<input type="button" id="resetear" value="Resetear" onclick="resetear()"/>
+        <script>
+		var posTortuga=1;
+		function tiempo(){
+			return true;
+		}
+		function juego(){
+			    var ale=Math.floor((Math.random()*6)+1);
+				var conejo;
+				switch(ale){
+					case 1:
+					case 2:
+					case 3:
+					case 4:
+					case 5:
+						document.getElementById("t"+posTortuga).style.visibility = "hidden";
+						posTortuga=posTortuga+1;
+						if(posTortuga<7){
+							document.getElementById("t"+posTortuga).style.visibility = "visible";
+						}else{
+							document.getElementById("zanahoria").style.visibility = "hidden";
+							document.getElementById("zt").style.visibility = "visible";
+							document.getElementById("jugar").disabled = true;
+						}
+						break;
+					case 6:
+						/*for(var i=1;i<7;i++){
+							document.getElementById("c"+i).style.visibility = "hidden";
+							if(i!=6){
+								var tiem=setTimeout("tiempo()",10000);
+								document.getElementById("c"+(i+1)).style.visibility = "visible";
+							}
+							
+							
+						}*/
+						document.getElementById("zanahoria").style.visibility = "hidden";
+						document.getElementById("zc").style.visibility = "visible";
+						document.getElementById("jugar").disabled = true;
+						break;
+				}
+		}
+		function resetear(){
+		if(posTortuga!=7){
+			document.getElementById("t"+posTortuga).style.visibility = "hidden";
+		}
+			document.getElementById("zt").style.visibility = "hidden";
+			document.getElementById("zc").style.visibility = "hidden";
+			posTortuga=1;
+			document.getElementById("t"+posTortuga).style.visibility = "visible";
+			document.getElementById("c"+posTortuga).style.visibility = "visible";
+			document.getElementById("zanahoria").style.visibility = "visible";
+			document.getElementById("jugar").disabled = false;
+		}
+         </script>
+		 </body>
+</html>

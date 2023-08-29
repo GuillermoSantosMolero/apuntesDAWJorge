@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Formulario</title>
+    <script src="validarConClick.js"></script>
+    <!-- <link rel="stylesheet" href="./ej6-bootstrap-formulario.css"> -->
+</head>
+
+<body id="body" onload="mostrarBody()" hidden="true">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h3><strong>Formulario</strong> </h3>
+            </div>
+        </div>
+        <form action="" class="form">
+            <fieldset>
+                <legend>Datos básicos</legend>
+                <div class="row form-group">
+                    <div class="col-7 ml-2">
+                        <label for="Nombre">
+                            Nombre
+                        </label>
+                    </div>
+                    <div class="col-10 ml-2">
+                        <input type="text" class="rounded" maxlength="20" size="20" name="nombre" id="nombre" onfocusOut="ponerAMayusculas()"  onkeypress="return funcionNombre(event)">
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-7 ml-2">
+                        <label for="Descripcion">
+                            Apellidos
+                        </label>
+                    </div>
+                    <div class="col-10 ml-2">
+                        <input type="text" class="rounded" maxlength="50" size="50" name="apellidos" id="apellidos" onfocusOut="ponerAMayusculas()" onkeypress="return funcionApellidos(event)" >
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-7 ml-2">
+                        <label for="Domicilio">
+                            Domicilio
+                        </label>
+                    </div>
+                    <div class="col-10 ml-2">
+                        <input type="text" class="rounded" maxlength="50" size="50" name="domicilio" id="domicilio" onfocusOut="ponerAMayusculas()" onkeypress="return funcionDomicilio(event)" >
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-7 ml-2">
+                        <label for="codPostal">
+                            Codigo Postal
+                        </label>
+                    </div>
+                    <div class="col-10 ml-2">
+                        <input type="text" class="rounded" maxlength="5" size="5" name="cPostal" id="cPostal" onfocusOut="comprobarCiudad()" onkeypress="return funcionCPostal(event)">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-7 ml-2">
+                        <label for="Ciudad">
+                            Ciudad
+                        </label>
+                    </div>
+                    <div class="col-10 ml-2">
+                        <input type="text" class="rounded" maxlength="20" size="20" name="ciudad" id="ciudad" onfocusOut="ponerAMayusculas()" onkeypress="return funcionPoblacion(event)">
+                    </div>
+                </div>
+                <br>
+                <input type="submit" value="Enviar">
+            </fieldset>
+        </form>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

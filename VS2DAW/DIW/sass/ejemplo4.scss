@@ -1,0 +1,17 @@
+$usuarios:pepe,lola,manuel;
+@each $e in $usuarios {
+    .profile-#{$e}{
+        background: image-url('img/#{$e}.png') no-repeat;
+    }
+}
+
+$mapusers:(
+    pepe:"pepe.png",
+    lola:"lola.png",
+    manuel:"manuel.png"
+);
+@each $u,$v in $mapusers{
+    .perfil-#{$u}{
+        background-image: image-url('img/#{$v}');
+    }
+}

@@ -1,0 +1,24 @@
+.container{
+    margin: 1em 5em;
+}
+header{
+    margin: 2em 1em;
+}
+.clm,.info{
+    border: 0.05em black solid;
+    padding: 1.2em;
+}
+.fila{
+    border: 0.05em black solid;
+    margin: 1em 0em;
+}
+body{
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(9,138,148,1) 100%);
+}
+.boton{
+    width: 32%;
+}
+a{
+    color: #010974;
+}

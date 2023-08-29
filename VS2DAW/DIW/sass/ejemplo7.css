@@ -1,0 +1,16 @@
+.btn_ok, .btn-error {
+  border-radius: 2px;
+  padding: 5px 0;
+  margin: 2px auto;
+  text-align: left;
+}
+
+.btn-error {
+  background-color: red;
+}
+
+.btn_ok {
+  background-color: green;
+}
+
+/*# sourceMappingURL=ejemplo7.css.map */

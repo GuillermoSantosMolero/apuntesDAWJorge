@@ -1,0 +1,82 @@
+#messages.info td {
+	background: url('/BibliotecaJSF/resources/imagenes/Information.gif') no-repeatleftcenter;
+	padding-left: 55px;
+	font-size: 20px;
+	height: 60px;
+	color: blue;
+}
+.INFO{
+	color: blue;
+}
+html {
+  min-height: 100%;
+  position: relative;
+}
+body {
+	background-color: #beeaf1;
+	font-family:Verdana, Geneva, sans-serif;
+	margin: 0 0 40px;
+}
+header {
+    margin-right:auto;
+    margin-left:auto;
+    width: 1154px; 
+}
+#logo{
+	margin-top:-10px;
+}
+#menu{
+	font-size: 16px;
+    margin-top:20px;
+	margin-right: auto;
+	margin-left: auto;
+	width: 640px;
+}
+#contenido{
+	margin-right: auto;
+	margin-left: auto;
+	background-color: #fefdc2;
+	width: 640px;
+	font-size: 18px;
+
+}
+#footer{
+	text-align:center;
+    width: 100%;
+    bottom: 0;
+    position:absolute;
+    height: 40px;
+}
+.exito{
+	color:#0eb823;
+	font-size: 12px;
+}
+.error{
+	color:#fb0000;
+	font-size: 12px;
+}
+.advertencia{
+	color:red;
+	font-size: 12px;
+}
+fieldset{
+	font-size: 15px;
+}
+.list-header{
+	font-size: 20px;
+}
+.list-columns{
+	font-size: 18px;
+}
+#selectAutor{
+	font-size: 12px;
+}
+.divselectAutor{
+	text-align:center;
+}
+.tabla{
+	display:table-cell;
+}
+.tablaconsulta{
+	font-size: 14px;
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/WEB-INF/plantillas/plantilla.xhtml">
+<ui:define name="title">lista socios morosos</ui:define>
+
+<ui:define name="contenido">
+	
+<h:messages globalOnly="true" layout="table" infoClass="advertencia"></h:messages>
+			
+<h:form id="frmlistadosociospaginado" prependId="false">
+
+<div class="navegacionTabla">
+
+	<h:outputText value="Mostrando #{backingSociosMorosos.paginacion.primerElementoPagina} .. #{backingSociosMorosos.paginacion.ultimoElementoPagina} de #{backingSociosMorosos.paginacion.itemsCount} " />
+					
+	<h:commandLink id="anterior" value=" Anterior " rendered="#{backingSociosMorosos.paginacion.hayPaginaAnterior}">
+	
+		<f:ajax execute="@form" render="@form" listener="#{backingSociosMorosos.paginaAnterior}" />
+		
+	</h:commandLink>
+					
+	<h:commandLink id="siguiente" value=" Siguiente " rendered="#{backingSociosMorosos.paginacion.hayPaginaSiguiente}">
+	
+		<f:ajax execute="@form" render="@form" listener="#{backingSociosMorosos.paginaSiguiente}" />
+	
+	</h:commandLink>
+					
+	<h:selectOneMenu id="slctpaginacion" value="#{backingSociosMorosos.slctnrpag}">
+		<f:selectItem itemLabel="1" itemValue="1" />
+		<f:selectItem itemLabel="2" itemValue="2" />
+		<f:selectItem itemLabel="3" itemValue="3" />
+		<f:selectItem itemLabel="5" itemValue="5" />
+		<f:ajax listener="#{backingSociosMorosos.resetPaginacion}" render="@form" />
+	</h:selectOneMenu>
+					
+</div>
+
+<h:dataTable styleClass="tabla" id="tablasociosmorosos" var="prestamo"
+			 rendered="#{not empty backingSociosMorosos.listSociosMorosos}"
+			 value="#{backingSociosMorosos.listSociosMorosos}" border="1"
+			 headerClass="list-header" rowClasses="filaimpar,filapar"
+			 columnClasses="list-columns,list-columns,list-columns,list-columns,list-columns">
+			 		 
+	<f:facet name="header"><h:outputText value="Listado de Socios Morosos"></h:outputText></f:facet>
+	
+	<h:column id="IdSocio">
+		<f:facet name="column"><h:outputText value="IdSocio"></h:outputText></f:facet>
+		<h:outputText value="#{prestamo.socio.idsocio}"></h:outputText>
+	</h:column>
+	
+	<h:column id="Nombre">
+		<f:facet name="column"><h:outputText value="Nombre"></h:outputText></f:facet>
+		<h:outputText value="#{prestamo.socio.nombre}"></h:outputText>
+	</h:column>
+	
+	<h:column id="Libros">
+		<f:facet name="column"><h:outputText value="Ver Libros"></h:outputText></f:facet>
+		
+		<h:commandLink action="#{backingSociosMorosos.librosdelmoroso(prestamo)}" value="Libros">
+			<f:ajax render="panelgrouptablalibros"></f:ajax>
+		</h:commandLink>
+	</h:column>
+	
+</h:dataTable>
+
+<h:panelGroup id="panelgrouptablalibros">
+<h:dataTable styleClass="tabla" id="tablalibros" var="prestamo"
+			 rendered="#{not empty backingSociosMorosos.listLibrosdelMoroso}"
+			 value="#{backingSociosMorosos.listLibrosdelMoroso}" border="1"
+			 headerClass="list-header" rowClasses="filaimpar,filapar"
+			 columnClasses="just-derecha,just-izquierda,just-izquierda,just-centro">
+			 		 
+	<f:facet name="header"><h:outputText value="LIBROS A DEVOLVER POR PARTE DEL SOCIO: #{backingSociosMorosos.socioseleccionado}"></h:outputText></f:facet>
+	
+	<h:column id="IdEjemplar">
+		<f:facet name="header"><h:outputText value="Id Ejemplar"></h:outputText></f:facet>
+		<h:outputText value="#{prestamo.ejemplar.idejemplar}"></h:outputText>
+	</h:column>
+	
+	<h:column id="Titulo">
+		<f:facet name="header"><h:outputText value="Titulo"></h:outputText></f:facet>
+		<h:outputText value="#{prestamo.ejemplar.libro.titulo}"></h:outputText>
+	</h:column>
+	
+	<h:column id="DiasDemora">
+		<f:facet name="header"><h:outputText value="Dias de demora"></h:outputText></f:facet>
+		<h:outputText value="#{prestamo.diasDemora}"></h:outputText>
+	</h:column>
+	
+</h:dataTable>
+</h:panelGroup>
+
+</h:form>
+</ui:define>
+</ui:composition>
+</html>

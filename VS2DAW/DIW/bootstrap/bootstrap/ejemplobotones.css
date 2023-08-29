@@ -1,0 +1,12 @@
+.botonprimario{
+    background-color:  rgba(110, 104, 101, 0, 527);
+}
+input::-webkit-input-placeholder {
+    font-size: 0.8em;
+}
+input:-moz-placeholder{
+    font-size: 0.8em;
+}
+input:-ms-input-placeholder{
+    font-size: 0.8em;
+}

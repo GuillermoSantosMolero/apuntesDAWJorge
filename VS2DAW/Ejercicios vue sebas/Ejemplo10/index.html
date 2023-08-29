@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+    <title>CURSO VUE</title>
+</head>
+<div id="app">
+    <h1>{{mensaje}}</h1>
+    <input type="text" v-model="newschool" @keyup.enter="addSchool">
+    <button v-on:click="addSchool" >Agregar </button>
+
+    </button>
+    <h1>Nuevo ies {{newschool}}</h1>
+    <ul>
+        <li v-for="school in schools">
+            <input type="number" v-model.number="school.alumnos">
+            {{school.nombre}}-->{{school.alumnos}}
+            <span v-if="school.alumnos > 650">Muy grande</span>
+            <button @click="school.alumnos=school.alumnos+1">+</button>
+            <button @click="school.alumnos=school.alumnos-1">-</button>
+        </li>
+        <!--Modificar este ejercicio y hacedlo con eventos de modo que los resultados no lleguen a ser negativos-->
+    </ul>
+
+</div>
+<script src="../vue.js"></script>
+<script src="ejemplo10.js"></script>
+</html>

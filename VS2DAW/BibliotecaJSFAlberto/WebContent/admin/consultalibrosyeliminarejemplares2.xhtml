@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/WEB-INF/plantillas/plantilla.xhtml"
+				xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"> 
+				
+<ui:define name="title">modificar socio</ui:define>
+
+<ui:define name="contenido">
+
+<div id="divgeneral" class="divformconsulta">
+
+<h:form id="formconsulta" prependId="false">
+
+<h:messages globalOnly="true" layout="table" infoClass="advertencia"></h:messages>
+
+<h:panelGrid title="Realizar consulta" columns="3" border="0">
+   
+   <h:outputText value="Cadena a buscar" ></h:outputText>
+   
+   <h:inputText id="cadenaconsulta" value="#{backingConsultaEliminarEjemplares.cadenaconsulta}">
+           <f:ajax event="blur" render="messageconsulta" />
+           <f:ajax event="keyup" listener="#{backingConsultaEliminarEjemplares.consultarlibrosporcadena}"
+								render="nohayconsulta consultaencontrada" />
+   </h:inputText>
+   
+   <h:message for="cadenanombreautor" errorClass="advertencia" id="messageautor"></h:message>
+   
+</h:panelGrid>
+
+<div class="divselecteleccion">
+
+	<h:selectOneMenu id="selectoneeleccion" value="#{backingConsultaEliminarEjemplares.eleccion}" 
+	layout="pageDirection" styleClass="tabla">
+		<f:ajax event="change"/>
+		<f:selectItem itemLabel="autor" itemValue="autor"/>
+		<f:selectItem itemLabel="libro" itemValue="libro"/>
+		<f:selectItem itemLabel="isbn" itemValue="isbn"/>
+		
+	</h:selectOneMenu>
+
+</div>
+
+<h:panelGroup id="nohayconsulta">
+
+	<h:outputText value="no se han encontrado libros con esa cadena"
+				  rendered="#{backingConsultaEliminarEjemplares.listaConsultarLibros!=null and backingConsultaEliminarEjemplares.totalLibrosEncontrados==0}">
+	</h:outputText>
+	
+</h:panelGroup>
+
+<h:panelGroup id="consultaencontrada">
+
+	<h:dataTable id="tablaconsulta" styleClass="tablaconsulta" rendered="#{backingConsultaEliminarEjemplares.totalLibrosEncontrados>0}"
+				 value="#{backingConsultaEliminarEjemplares.listaConsultarLibros}" var="consulta">
+				 
+		<f:facet name="header">
+			<h:outputText value="Libros encontrados"></h:outputText>
+		</f:facet>
+		
+		<h:column id="isbn">
+			<f:facet name="header">
+				<h:outputText value="isbn"></h:outputText>
+			</f:facet>
+			<h:outputText value="#{consulta[0]}"></h:outputText>
+		</h:column>
+		
+		<h:column id="titulo">
+			<f:facet name="header">
+				<h:outputText value="titulo"></h:outputText>
+			</f:facet>
+			<h:outputText value="#{consulta[1]}"></h:outputText>
+		</h:column>
+		
+		<h:column id="autor">
+			<f:facet name="header">
+				<h:outputText value="autor"></h:outputText>
+			</f:facet>
+			<h:outputText value="#{consulta[2]}"></h:outputText>
+		</h:column>
+		
+		<h:column id="ejemplarestotales">
+			<f:facet name="header">
+				<h:outputText value="ejemplares totales"></h:outputText>
+			</f:facet>
+			<h:outputText value="#{consulta[3]}"></h:outputText>
+		</h:column>
+		
+		<h:column id="prestados">
+			<f:facet name="header">
+				<h:outputText value="prestados"></h:outputText>
+			</f:facet>
+			<h:outputText value="#{consulta[4]}"></h:outputText>
+		</h:column>
+		
+		<h:column id="disponibles">
+			<f:facet name="header">
+				<h:outputText value="disponibles"></h:outputText>
+			</f:facet>
+			<h:outputText value="#{consulta[5]}"></h:outputText>
+		</h:column>
+<!--  		
+		<h:column id="eliminar ejemplares">
+			<f:facet name="header">
+				<h:outputText value="eliminar ejemplares"></h:outputText>
+			</f:facet>
+		<h:commandLink action="#{backingConsultaEliminarEjemplares.buscarEjemplares(consulta[0])}" value="Eliminar ejemplares" 
+					   disabled="if(consulta[5]>0) {return false;} else {return true;}">
+			<f:ajax render="panelgroupejemplaresaeliminar"></f:ajax>
+		</h:commandLink>
+		</h:column>
+-->
+	</h:dataTable>
+			
+</h:panelGroup>
+<!--  
+<h:panelGroup id="panelgroupejemplaresaeliminar">
+
+<div class="divsejemplaresaeliminar">
+
+	<h:selectManyCheckbox id="selectmanyejemplares" value="#{backingConsultaEliminarEjemplares.ejemplaresAborrar}" 
+	layout="pageDirection" styleClass="tabla">
+		
+		<f:selectItems value="#{backingConsultaEliminarEjemplares.listaEjemplares}" var="ejemplar"
+					   itemLabel="#{ejemplar.idejemplar}" itemValue="#{ejemplar.idejemplar}"/>
+	
+	</h:selectManyCheckbox>
+	
+	<h:commandButton onclick="if(confirm('¿Desea elimiar el/los ejemplar/es seleccionado/s?')) {return true;} else {return false;}"
+					 action="#{backingConsultaEliminarEjemplares.eliminarrejemplares}" value="Eliminar">			 
+		<f:ajax execute ="@form" render="@form messages" />	
+	</h:commandButton>
+</div>
+
+</h:panelGroup>
+-->
+
+</h:form>
+</div>
+</ui:define>
+</ui:composition>
+</html>

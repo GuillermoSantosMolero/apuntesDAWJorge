@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="ejercicio1.css" type="text/css">
+    <title>Ejercicio1 bootstrap</title>
+  </head>
+  <body>
+    <div class="container">  
+        <header>
+            <div class="row">
+                <div class="col-2 clm"><img src="img/CLM.jpg" class="img-fluid"/></div>
+                <div class="col-8 info">
+                    <div class="row">
+                        <span>Junta de comunidades de Castilla-La Mancha</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <span>Juan Romero Romero</span>
+                        </div>
+                        <div class="col-1">
+                            <span>Perfil:</span>
+                        </div>
+                        <div class="col-3">
+                            <span>Jefe de estudios</span>
+                        </div>
+                        <div class="col-1">
+                            <span>Fecha</span>
+                        </div>
+                        <div class="col-2">
+                            <span>1/1/2020</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <span>Centro educativo</span>
+                        </div>
+                        <div class="col-8">
+                            <span>I.E.S AZARQUIEL</span>
+                        </div>
+                        <div class="col-1">
+                            <input type="image" src="img/ejemplo.png" class="img-fluid"/>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-2 opciones">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opciones</button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Iniciar sesión</a>
+                            <a class="dropdown-item" href="#">Cambiar perfil</a>
+                            <a class="dropdown-item" href="#">Cerrar sesión</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="row">
+                <ul class="nav">
+                    <li class="nav-item">
+                      <a class="nav-link active" href="#">Nuevo</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Buscar</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Importar</a>
+                    </li>
+                </ul>
+        </div>
+        <div class="row fila">
+            <div class="col-8">
+                <span>Seleccione una forma y escriba texto. El controlador amarillo ajusta el interlineado</span>
+            </div>
+            <div class="col-4">
+                <input class="boton btn btn-primary" type="button" value="Borrar" data-toggle="modal" data-target="#exampleModal" data-whatever="David Casas">
+                <input class="boton btn btn-primary" type="button" value="Modificar" data-toggle="modal" data-target="#" data-whatever="">
+                <input class="boton btn btn-primary" type="button" value="Detalles" data-toggle="modal" data-target="#" data-whatever="">
+            </div>
+        </div>
+        <div class="row fila">
+            <div class="col-8"></div>
+            <div class="col-4">
+                <input class="boton btn btn-primary" type="button" value="Borrar" data-toggle="modal" data-target="#exampleModal" data-whatever="Carlos Campayo">
+                <input class="boton btn btn-primary" type="button" value="Modificar" data-toggle="modal" data-target="#" data-whatever="">
+                <input class="boton btn btn-primary" type="button" value="Detalles" data-toggle="modal" data-target="#" data-whatever="">
+            </div>
+        </div>
+        <div class="row fila">   
+            <div class="col-8"></div>
+            <div class="col-4">
+                <input class="boton btn btn-primary" type="button" value="Borrar" data-toggle="modal" data-target="#exampleModal" data-whatever="José Mota">
+                <input class="boton btn btn-primary" type="button" value="Modificar" data-toggle="modal" data-target="#" data-whatever="">
+                <input class="boton btn btn-primary" type="button" value="Detalles" data-toggle="modal" data-target="#" data-whatever="">
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Borrar el usuario:</h5>
+                </div>
+                <div class="modal-body">
+                        <p>
+                            Este usuario tiene documentación en vigor
+                        </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Borrar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+            $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var recipient = button.data('whatever') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').text('Borrar el usuario: ' + recipient)
+        modal.find('.modal-body input').val(recipient)
+        })
+    </script>
+</body>
+</html>

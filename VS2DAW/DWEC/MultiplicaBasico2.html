@@ -1,0 +1,27 @@
+﻿<html>
+	<head>
+	</head>
+	<body>
+		<h1>Tabla de Multiplicar</h1>
+		<h3 id="subtitulo" style="visibility:hidden">Número elegido: </h3>
+		<p id="tabla"</p>
+		<script>
+			var numero = prompt("Introduzca un númro de (2 - 10): ","2");
+			if (numero!=null) {
+				if(numero<=10 && numero>=2){
+				var cadena ="";
+					document.getElementById("subtitulo").innerHTML = "Numero elegido: "+ numero;
+					for (var i=1;i<=10;i++){
+						cadena =cadena + numero + " x " + i + " = " + i*numero + "&#x10;";
+					}
+					document.getElementById("tabla").innerHTML = cadena;
+				}else{ // el numero introducido esta fuera de rango
+					alert("Numero fuera de rango");
+				}
+			} else {
+				alert("Operacion cancelada por el usuario");
+			}
+			
+		</script>
+	</body>
+</html>

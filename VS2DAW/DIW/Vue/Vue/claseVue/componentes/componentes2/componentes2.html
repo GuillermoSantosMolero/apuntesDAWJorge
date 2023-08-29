@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Curso VUE</title>
+</head>
+<body>
+    <div id="app">
+        <titulo></titulo>
+    </div>
+</body>
+<script src="../../../vue.js"></script>
+<script src="https://unpkg.com/vuex@3.1.2/dist/vuex.js"></script>
+<script src="padrevuex.js"></script>
+<script src="hijovuex.js"></script>
+<script>
+    const store=new Vuex.Store({
+        state:{
+            numero:10,
+        },
+        mutations:{
+            incrementar(){
+                this.state.numero++;
+            }
+        }
+    })
+    new Vue({
+        el:'#app',
+        store
+    })
+</script>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>CURSO VUE</title>
+</head>
+<div id="app">
+    <school-card 
+        v-for='(school, index) in schools'
+        key='index'
+        :title="school.nombre"
+        :image="school.url">
+    </school-card>
+</div>
+<script src="../vue.js"></script>
+<script src="Componente2.js"></script>
+</html>

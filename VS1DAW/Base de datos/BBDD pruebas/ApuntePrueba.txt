@@ -1,0 +1,141 @@
+-- 1. Nombre y empleo de aquellos que tengan la calificacion de bueno, excelente o normal en su 
+--    oficio
+
+SELECT e.nombre, o.oficio
+FROM EMPLEADO E, OFICIOEMPLEADO OE, OFICIO O
+WHERE e.numemp=oe.empleado
+AND o.numoficio=oe.oficio
+AND oe.calificacion IN ('BUENO','EXCELENTE','NORMAL')
+
+-- 2. Oficios para los que haya algun empleado que sea preciso o excelente
+
+SELECT DISTINCT o.oficio
+FROM OFICIOEMPLEADO OE, OFICIO O
+WHERE o.numoficio=oe.oficio
+AND oe.calificacion IN ('EXCELENTE','PRECISO')
+
+-- 3. Obtener los nombres de los empleados alojados en el alojamiento
+--    regentado por John Peletier
+
+SELECT e.nombre, a.alojamiento
+FROM EMPLEADO E, ALOJAMIENTO A
+WHERE a.responsable='JOHN PELETIER'
+AND e.alojamiento=a.numaloj
+
+-- 4. Obtener los alojamientos donde se hospede al menos un obrero que cobre MAS DE un dolar diario
+
+SELECT a.alojamiento
+FROM EMPLEADO E, ALOJAMIENTO A
+WHERE e.sueldo>1.5
+AND e.alojamiento=a.numaloj
+
+-- 5. Obtener los oficios para los que no hay ningun empleado
+
+SELECT o.oficio
+FROM OFICIO O
+WHERE o.numoficio NOT IN(SELECT DISTINCT oe.oficio
+                        FROM OFICIOEMPLEADO OE)
+
+-- 6. Obtener el numero de labradores que se alojan en alguno de los
+--    alojamientos de keene. Obtener la media de edad de todos ellos.
+
+SELECT COUNT(oe.empleado) NUMERODEEMPLEADOS,AVG(c.edad) EDADMEDIA
+FROM OFICIOEMPLEADO OE,OFICIO O,(SELECT e.numemp,e.edad
+                                    FROM EMPLEADO E, ALOJAMIENTO A
+                                    WHERE a.direccion LIKE ('%KEENE%')
+                                    AND e.alojamiento=a.numaloj)C
+WHERE oe.empleado=c.numemp
+AND oe.oficio=o.numoficio
+AND o.oficio='LABRADOR'
+
+-- 7. Hallar el numero de oficios diferentes que pueden ejercer los
+--    inquilinos de ROSE HILL
+
+SELECT COUNT(oe.oficio) OFICIOSDISTINTOS
+FROM OFICIOEMPLEADO OE,(SELECT e.numemp
+                        FROM EMPLEADO E, ALOJAMIENTO A
+                        WHERE a.alojamiento='ROSE HILL'
+                        AND e.alojamiento=a.numaloj)C
+WHERE oe.empleado=c.numemp
+
+-- 8. Obtener el nombre y la edad del trabajador mas viejo y del
+--    trabajador mas joven de todos los que residan en alguno de
+--    los alojamientos de EDMESTON
+
+SELECT e.nombre, e.edad
+FROM EMPLEADO E,(SELECT MAX(e.edad) MAXIMA,MIN(e.edad) MINIMA
+                    FROM EMPLEADO E, ALOJAMIENTO A
+                    WHERE a.direccion LIKE '%EDMESTON%'
+                    AND e.alojamiento=a.numaloj)C
+WHERE e.edad IN (c.maxima,c.minima)
+
+-- 9. Obtener ordenados de menor a mayor, la edad media de los
+--    trabajadores de cada uno de los oficios, siempre que haya
+--    mas de un trabajador para el oficio
+
+SELECT o.oficio,ROUND(d.edadmedia,2)
+FROM OFICIO O,(SELECT oe.oficio OFICIO,AVG(e.edad) EDADMEDIA,COUNT(oe.empleado) NUMEMPLEADOS
+                FROM OFICIOEMPLEADO OE, EMPLEADO E
+                WHERE e.numemp=oe.empleado
+                GROUP BY oe.oficio)D
+WHERE d.oficio=o.numoficio
+AND d.numempleados>1
+
+-- 10. Obtener en cada alojamiento, el nombre y el sueldo del 
+--     empleado que mas cobre
+
+SELECT E.NOMBRE, a.alojamiento,e.sueldo
+FROM EMPLEADO E,ALOJAMIENTO A,(SELECT MAX(E.SUELDO)MAXIMO,e.alojamiento ALOJ
+                         FROM EMPLEADO E
+                         GROUP BY e.alojamiento)C
+WHERE c.aloj=a.numaloj
+AND c.maximo=e.sueldo
+AND e.alojamiento=c.aloj
+
+-- 11. Obtener el numero de trabajadores menores de 35 años que hay
+--     para cada especialidad, ordenados de mayor a menor numero
+--     de trabajadores
+
+SELECT o.oficio,COUNT(e.numemp) EMPLEADOSPORESPECIALIDAD
+FROM OFICIOEMPLEADO OE, EMPLEADO E, OFICIO O
+WHERE oe.empleado=e.numemp
+AND e.edad>35
+AND oe.oficio=o.numoficio
+GROUP BY oe.oficio,o.oficio
+ORDER BY EMPLEADOSPORESPECIALIDAD DESC
+
+-- 12. Obtener el nombre de los empleados que no vivan en ROSE HILL y
+--     sean mayores que al menos uno de los que viven en ROSE HILL
+SELECT e.nombre
+FROM EMPLEADO E,ALOJAMIENTO A,  (SELECT MIN(e.edad) EDADMINIMA
+                                FROM EMPLEADO E, ALOJAMIENTO A
+                                WHERE a.alojamiento='ROSE HILL'
+                                AND e.alojamiento=a.numaloj)D
+WHERE a.alojamiento!='ROSE HILL'
+AND e.alojamiento=a.numaloj
+AND e.edad>d.edadminima
+
+-- 13. Obtener el nombre del responsable del alojamiento con la edad
+--     media de sus clientes mas elevada
+
+SELECT a.responsable
+FROM ALOJAMIENTO A,
+                    (SELECT MAX(d.edadmedia) EDADMEDIAMAXIMA
+                    FROM ALOJAMIENTO A, (SELECT e.alojamiento ALOJ, ROUND(AVG(e.edad),2) EDADMEDIA
+                                         FROM EMPLEADO E
+                                        GROUP BY e.alojamiento)D
+                    WHERE a.numaloj=d.aloj)T,
+                                                (SELECT e.alojamiento ALOJ, ROUND(AVG(e.edad),2) EDADMEDIA
+                                                FROM EMPLEADO E
+                                                GROUP BY e.alojamiento)C
+WHERE T.EDADMEDIAMAXIMA=c.edadmedia
+AND a.numaloj=c.aloj
+
+-- 14 NOMBRE DE OFICIO, NOMBRE DE TRABAJADOR Y EDAD DEL/LOS TRABAJADORES 
+--    DE MAYOR EDAD EN CADA OFICIO
+
+
+
+/* ******************************************************/
+-- 15. Obtener el nombre y el oficio de todos los empleados cuyo sueldo es igual al de JOHN PEARSON
+--     o al de DONALD ROLLO.

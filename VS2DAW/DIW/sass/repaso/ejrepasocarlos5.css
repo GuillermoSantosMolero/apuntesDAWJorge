@@ -1,0 +1,15 @@
+.box-square {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  border-radius: 0;
+}
+
+.box-rounded {
+  -webkit-border-radius: 10;
+  -moz-border-radius: 10;
+  -ms-border-radius: 10;
+  border-radius: 10;
+}
+
+/*# sourceMappingURL=ejrepasocarlos5.css.map */

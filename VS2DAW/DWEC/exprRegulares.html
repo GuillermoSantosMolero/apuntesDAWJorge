@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<!---Dado un array de objetos tipo persona
+		persona		nombre
+					Apellidos
+					Edad
+					Nacionalidad
+	Generar dos arrays distintos. El primero ordenado alfabÃ©ticamente 
+	segÃºn el apellido y el segundo ordenado de mayor a menor edad.-->
+	<head>
+        <meta charset="UTF-8"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title></title>
+		<style>
+			input{
+				width: 5em;
+			}
+		</style>
+	</head>
+	<body>
+        <label>Dia:</label><br />
+        <input type="text" id="dia" onfocusout="comprobarDia()"></input><br /> <p id="errorDia"></p>
+        <label>Mes:</label><br />
+        <select id="mes">
+            <option value="1">Enero</option>
+            <option value="2">Febrero</option>
+            <option value="3">Marzo</option>
+            <option value="4">Abril</option>
+            <option value="5">Mayo</option>
+            <option value="6">Junio</option>
+            <option value="7">Julio</option>
+            <option value="8">Agosto</option>
+            <option value="9">Septiembre</option>
+            <option value="10">Octubre</option>
+            <option value="11">Noviembre</option>
+            <option value="12">Diciembre</option>
+        </select><br />
+        <label>Año:</label><br />
+        <textarea id="ano" value=""></textarea><br />
+        <input type="button" value="Validar" onclick="validarFecha();" />
+        <p id="validacionFecha"></p>
+		<script>
+            function validarFecha(){
+                if(menorFinalAno()){
+                    if(validarDiaEnMes()){
+                        if(comprobarAno()){
+                            if(menorFechaActual())
+                                document.getElementById("validacionFecha").innerHTML="Fecha válida";
+                        }
+                    }
+                }
+            }
+            function menorFinalAno(){
+                var diaEntrada=parseInt(document.getElementById("dia").value);
+                var mesEntrada=parseInt(document.getElementById("mes").value);
+                var anoEntrada=parseInt(document.getElementById("ano").value);
+                var fecha=new Date(anoEntrada,mesEntrada-1,diaEntrada);
+                var fechaFinal=new Date(2020,0,1);
+                if(fechaFinal<=fecha){
+                    document.getElementById("validacionFecha").innerHTML="La fecha introducida debe ser inferior a finales de año";
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+            function comprobarDia(){
+                var diaEntrada=document.getElementById("dia").value;
+                var long = diaEntrada.length;
+                diaEntrada= parseInt(diaEntrada);
+                if(long>2 || diaEntrada<1 || diaEntrada>31){
+                    alert("El día no es válido");
+                }
+            }
+            function validarDiaEnMes(){
+                var diaEntrada=parseInt(document.getElementById("dia").value);
+                var mesEntrada=parseInt(document.getElementById("mes").value);
+                var anoEntrada=parseInt(document.getElementById("ano").value);
+                switch (mesEntrada){
+                    case 1:
+                    case 3:
+                    case 5:
+                    case 7:
+                    case 8:
+                    case 10:
+                    case 12:
+                        if(diaEntrada<1 || diaEntrada>31){
+                            document.getElementById("validacionFecha").innerHTML="La fecha no es válida. Pd: el mes introducido tiene 31 días";
+                            return false;
+                        }else{
+                            return true;
+                        }
+                    break;
+                    case 4:
+                    case 6:
+                    case 9:
+                    case 11:
+                        if(diaEntrada<1 || diaEntrada>30){
+                            document.getElementById("validacionFecha").innerHTML="La fecha no es válida. Pd: el mes introducido tiene 30 días";
+                            return false;
+                        }else{
+                            return true;
+                        }
+                    break;
+                    case 2:
+                        if(anoEntrada%4==0){
+                            if(diaEntrada<1 || diaEntrada>29){
+                                document.getElementById("validacionFecha").innerHTML="La fecha no es válida.<br /> Pd: el mes de febrero en años bisiestos tiene 29 días";
+                                return false;
+                            }else{
+                                return true;
+                            }
+                        }else{
+                            if(diaEntrada<1 || diaEntrada>28){
+                                document.getElementById("validacionFecha").innerHTML="La fecha no es válida.<br /> Pd: el mes de febrero en años no bisiestos tiene 28 días"; 
+                                return false;
+                            }else{
+                                return true;
+                            }
+                        }
+                    break;
+                }
+            }
+            function comprobarAno(){
+                var anoEntrada=document.getElementById("ano").value;
+                var long = anoEntrada.length;
+                anoEntrada= parseInt(anoEntrada);
+                if(long>4 || anoEntrada<1990 || anoEntrada>2019){
+                    document.getElementById("validacionFecha").innerHTML="El año introducido no es válido.<br /> El año debe de estar entre 1990 y 2019";
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+            function menorFechaActual(){
+                var diaEntrada=parseInt(document.getElementById("dia").value);
+                var mesEntrada=parseInt(document.getElementById("mes").value);
+                var anoEntrada=parseInt(document.getElementById("ano").value);
+                var fecha=new Date(anoEntrada,mesEntrada-1,diaEntrada,0,0,0);
+                var fechaHoy = new Date();
+                if(fecha>fechaHoy){
+                    document.getElementById("validacionFecha").innerHTML="La fecha no es válida.<br /> La fecha que se introduzca no puede ser superior a la fecha actual";
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+		</script>
+	</body>
+	
+</html>

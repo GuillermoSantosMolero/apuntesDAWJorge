@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title></title>
+		<style>
+			input{
+				width: 5em;
+			}
+		</style>
+
+	</head>
+	<body>
+		<h1>Ejercicio arrays:</h1><br />
+		<form>
+			<textarea name="mensaje" id="mensaje" value=""></textarea><br />
+			<label>El número de palabras del texto son:</label>
+			<input type="text" id="numpalabras" /><br />
+			<label>La primera palabra del texto es: </label>
+			<input type="text" id="primeraPalabra"/><br />
+			<label>La última palabra del texto es: </label>
+			<input type="text" id="ultimaPalabra"/><br /><br />
+			<label>Las palabras ordenadas por orden alfabético son:</label>
+			<p id="palabraOrdenadas"></p>
+			<label>Las palabras ordenadas por orden alfabético inverso son:</label>
+			<p id="palabrasOrdenadasInverso"></p>
+			<input type="button" value="Ejecutar" onclick="jugar();" />
+		</form>
+		<script>
+		function jugar(){
+			var linea = document.getElementById("mensaje").value.toLowerCase();
+			var esplit=linea.split(" ");
+			var resultado= esplit.filter(Boolean);
+			document.getElementById("numpalabras").value = resultado.length;
+			document.getElementById("primeraPalabra").value = resultado[0];
+			document.getElementById("ultimaPalabra").value = resultado[resultado.length-1];
+			document.getElementById("palabraOrdenadas").innerHTML = resultado.sort();
+			document.getElementById("palabrasOrdenadasInverso").innerHTML = resultado.reverse();
+		}
+		</script>
+	</body>
+	
+</html>

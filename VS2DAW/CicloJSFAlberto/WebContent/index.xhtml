@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"         
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<ui:composition template="/WEB-INF/plantillas/plantilla.xhtml"
+				xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">        
+<ui:define name = "contenido">
+
+<h:messages id="messages" globalOnlies="true" laiesout="table" infoClass="info" errorClass="advertencia"></h:messages>
+
+<h:form id="formselectIES" prependId="false">
+
+<h:panelGroup id="panelgroupselectIES">
+
+<div class="divselectIES">
+
+	<h:selectOneMenu id="selectoneselectIES" value="#{backingCiclo.eleccion}" rendered="#{backingCiclo.listaIES.size()>0}" layout="pageDirection" styleClass="tabla"> 					 
+		<f:selectItem itemLabel="seleccione un ies" itemValue="0"/>	
+		<f:selectItems value="#{backingCiclo.listaIES}" var="ies" itemLabel="#{ies.nombre}" itemValue="#{ies.idies}"/>	
+		<f:ajax event="change" render="@form messages panelgroupselectIES panelgroupofertaseducativas"/>
+	</h:selectOneMenu>
+
+</div>
+
+</h:panelGroup>
+
+</h:form>
+
+<h:panelGroup id="panelgroupofertaseducativas">
+
+<h:form id="formofertaseducativas" prependId="false">
+
+<h:dataTable id="tablaofertaseducativas" styleClass="tablaconsulta" rendered="#{backingCiclo.listaOfertaEducativa.size()>0}"
+				 value="#{backingCiclo.listaOfertaEducativa}" var="oferta">			
+		
+		<h:column id="Ciclo">
+			<f:facet name="header">
+				<h:outputText value="Ciclo"></h:outputText>
+			</f:facet>
+			<h:outputText value="#{oferta.ciclo.nombre}"></h:outputText>
+		</h:column>
+		
+		<h:column id="Turno">
+			<f:facet name="header">
+				<h:outputText value="Turno"></h:outputText>
+			</f:facet>
+			<h:outputText value="#{oferta.turno.descripcion}"></h:outputText>
+		</h:column>
+		
+		<h:column id="Plazas">
+			<f:facet name="header">
+				<h:outputText value="Plazas"></h:outputText>
+			</f:facet>
+			<h:outputText value="#{oferta.plazas}"></h:outputText>
+		</h:column>				
+		
+		<h:column id="Editaroferta">
+			<f:facet name="header">
+				<h:outputText value="Editar"></h:outputText>
+			</f:facet>	
+			<h:link value=" Editar linkparam " outcome="editaroferta">			
+				<f:param name="idies" value="#{oferta.ies.idies}"></f:param>
+				<f:param name="nombreies" value="#{oferta.ies.nombre}"></f:param>
+				<f:param name="cicloid" value="#{oferta.ciclo.idciclo}"></f:param>
+				<f:param name="ciclonombre" value="#{oferta.ciclo.nombre}"></f:param>
+				<f:param name="ciclogrado" value="#{oferta.ciclo.grado}"></f:param>
+				<f:param name="turnoid" value="#{oferta.turno.idturno}"></f:param>
+				<f:param name="turnodescripcion" value="#{oferta.turno.descripcion}"></f:param>
+				<f:param name="ofertaplazas" value="#{oferta.plazas}"></f:param>
+				<f:param name="url" value="/index.xhtml"></f:param>								
+			</h:link>			
+		</h:column>
+				
+		<h:column id="Eliminaroferta">
+			<f:facet name="header">
+				<h:outputText value="Eliminar"></h:outputText>
+			</f:facet>
+			<h:commandLink onclick="if(confirm('¿Desea elimiar la oferta?')) {return true;} else {return false;}" 
+						   action="#{backingCiclo.eliminarOferta(oferta.id)}" value="eliminar">
+						   <f:ajax render="@form messages"></f:ajax>		 	
+			</h:commandLink>				
+		</h:column>		
+
+</h:dataTable>
+
+<div class="divagregar">
+
+	<h:link value="Agregar oferta" outcome="agregaroferta" rendered="#{backingCiclo.listaOfertaEducativa.size()>0}">						
+		<f:param name="idies" value="#{backingCiclo.eleccion}"></f:param>
+		<f:param name="url" value="/index.xhtml"></f:param>								
+	</h:link>	
+	
+</div>
+	
+</h:form>
+
+</h:panelGroup>
+
+</ui:define>
+</ui:composition>
+</html>

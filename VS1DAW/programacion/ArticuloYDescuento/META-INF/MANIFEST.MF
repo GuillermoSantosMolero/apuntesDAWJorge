@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ArticuloYDescuento
+Bundle-SymbolicName: ArticuloYDescuento
+Bundle-Version: 1.0.0.qualifier
+Automatic-Module-Name: ArticuloYDescuento
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8

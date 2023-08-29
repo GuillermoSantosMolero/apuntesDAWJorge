@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<ui:composition template="/WEB-INF/plantillas/plantilla.xhtml"
+				xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"> 
+				      
+<ui:define name = "contenido">
+		
+<div id="eliminarAutor" class="divformularioeliminarautor">
+
+<h:form id="formeliminarautor" prependId="false">
+    
+<h:messages id="messages" globalOnly="true" layout="table" infoClass="info" errorClass="advertencia"></h:messages>
+        
+   
+<h:panelGrid title="Autor a eliminar" columns="3" border="0">
+   
+   <h:outputText value="Iniciales" ></h:outputText>
+   
+   <h:inputText id="cadenanombreautor" value="#{backingAutor.cadenanombreautor}" required="true" requiredMessage="Campo obligatorio">
+           <f:ajax event="blur" render="messageautor" />
+           <f:ajax event="keyup" listener="#{backingAutor.buscarAutoresPorCadena}"
+								render="autoresencontrados nohayautores" />
+   </h:inputText>
+   
+   <h:message for="cadenanombreautor" errorClass="advertencia" id="messageautor"></h:message>
+   
+</h:panelGrid>
+
+<h:panelGroup id="nohayautores">
+
+	<h:outputText value="no se han encontrado autores con esa cadena"
+				  rendered="#{backingAutor.listaAutores!=null and backingAutor.totalAutoresEncontrados==0}">
+	</h:outputText>
+	
+</h:panelGroup>
+
+<h:panelGroup id="autoresencontrados">
+<!--
+	<h:dataTable id="tablaautores" rendered="#{backingAutor.totalAutoresEncontrados>0}"
+				 value="#{backingAutor.listaAutores}" var="autor">
+				 
+		<f:facet name="header">
+			<h:outputText value="Autores encontrados"></h:outputText>
+		</f:facet>
+		
+		<h:column id="nombeautor">
+			<f:facet name="header">
+				<h:outputText value="Nombre"></h:outputText>
+			</f:facet>
+			<h:outputText value="#{autor.nombre}"></h:outputText>
+		</h:column>
+
+	</h:dataTable>
+-->	
+<div class="divselectoneautor">
+
+	<h:selectOneRadio id="selectoneautor" value="#{backingAutor.autoraborrar}" rendered="#{backingAutor.totalAutoresEncontrados>0}" 
+	layout="pageDirection" styleClass="tabla">
+	
+		<f:selectItems value="#{backingAutor.listaAutores}" var="autor"
+						itemLabel="#{autor.nombre}" itemValue="#{autor.idautor}"/>
+	</h:selectOneRadio>
+	
+	<h:commandButton onclick="if(confirm('¿Desea elimiar al autor seleccionado?')) {return true;} else {return false;}"
+					 action="#{backingAutor.borrarAutor}" value="Eliminar"
+					 rendered="#{backingAutor.totalAutoresEncontrados>0}">			 
+		<f:ajax execute ="@form" render="@form messages" />	
+	</h:commandButton>
+</div>
+
+<div id="pruebabinding">
+
+<h:form id="formulariopruebabinding">
+	
+	<h:panelGrid columns="1" border="1">
+	
+		<h:outputText id="outputbinding" binding="#{backingAutor.testBinding}" />
+		
+		<h:commandButton id="botMostrarBinding" value="MostrarBinding">
+		
+			<f:ajax listener="#{backingAutor.showMessageBinding}"
+					render="formulariopruebabinding"></f:ajax>
+			
+		</h:commandButton>
+		
+		<h:commandButton id="botOcultarBinding" value="OcultarBinding">
+		
+			<f:ajax listener="#{backingAutor.hideMessageBinding}"
+					render="formulariopruebabinding"></f:ajax>
+			
+		</h:commandButton>
+	
+	</h:panelGrid>
+	
+</h:form>
+	
+</div>
+
+</h:panelGroup>
+      
+</h:form>
+        
+</div>
+</ui:define> 
+</ui:composition>
+</html>

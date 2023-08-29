@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/WEB-INF/plantillas/plantilla.xhtml"
+				xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<ui:define name="metadata">
+	<f:metadata>	
+		<f:viewParam name="idsocio" value="#{backingEditarSocio2.idsocio}"/>
+		<f:viewParam name="pagina" value="#{backingEditarSocio2.url}" />
+		<f:viewAction action="#{backingEditarSocio2.init()}" />
+	</f:metadata>
+</ui:define>
+<ui:define name="contenido">
+	<div id="frmeditsocio" class="formulariogeneral">
+	<h:messages id="messages" globalOnly="true" layout="table" infoClass="info" errorClass="advertencia"></h:messages>
+	<h:form id="frmigetsocioiniciales" prependId="false">
+		<fieldset>
+		<legend>Modifica los datos del socio</legend>
+		<h:panelGrid columns="3" border="0">
+		<h:outputLabel for="frmeditsocionombre" value="Nombre:" />
+		<h:inputText id="frmeditsocionombre" value="#{backingEditarSocio2.socioseleccionado.nombre}" label="Nombre"></h:inputText>
+		<h:message id="msgeditsocionombre" for="frmeditsocionombre" errorClass="advertencia" />
+		<h:outputLabel for="frmeditsociodireccion" value="Direccion" />
+		<h:inputText id="frmeditsociodireccion" value="#{backingEditarSocio2.socioseleccionado.direccion}"
+			size="30" required="true" requiredMessage="Campo obligatorio"></h:inputText>
+		<h:message id="msgeditdireccion" for="frmeditsociodireccion" errorClass="advertencia" />
+		<h:outputText value=""></h:outputText>
+		<h:panelGroup>
+		<h:commandButton value ="Guardar" action="#{backingEditarSocio2.actualizarSocioSeleccionado}">
+			<f:ajax execute ="@form" render="@form messages" />
+		</h:commandButton>
+		<h:commandButton value="Cancelar" action="#{backingEditarSocio2.cancelar}" immediate="true"></h:commandButton>
+		<h:link value="Volver" outcome="/admin/modificarsocio.xhtml"></h:link>
+		</h:panelGroup>
+		</h:panelGrid>
+		</fieldset>
+	</h:form>
+	</div>
+	</ui:define>
+</ui:composition>
+</html>

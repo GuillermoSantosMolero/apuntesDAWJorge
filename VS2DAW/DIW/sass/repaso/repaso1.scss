@@ -1,0 +1,369 @@
+// Ejercicio1.-  Crea el código scss para obtener el siguiete css
+
+a{
+    text-decoration: none;
+    &:hover{
+    text-decoration: underline; 
+    }
+}
+
+// Ejericio2.- Crea el código scss para obtener el siguiente css
+nav{
+    ul{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    li{
+        display: inline-block;
+    }
+    a{
+        display: block;
+        padding: 6px 12px;
+        text-decoration: none;
+    }
+}
+// Ejercicio3- Crea el código scss utilizando extend para generar el siguiente código css
+.success {
+    border: 1px solid #ccc;
+    padding: 10px;
+    color: #333;
+    border-color: green;
+}
+  
+.error {
+    @extend .success;
+    border-color: red;
+}
+  
+.warning {
+    @extend .success;
+    border-color: yellow;
+}
+
+// Ejercicio 4.- Escribe el siguiente CSS usando las directivas “each” y “map” de scss 
+$hola:"hola";
+$mapita:(1:"darkorange",2:"springgreen",3:"springgreen");
+
+@each $i,$j in $mapita {
+    h#{$i}{
+        color:$j;
+    }
+    
+}
+
+// Ejercicio 5: Escribe el código scss usando mixins para genera el siguiente css
+
+@mixin cajita($radio) {
+    -webkit-border-radius:$radio;
+    -moz-border-radius:$radio;
+    -ms-border-radius:$radio;
+    border-radius:$radio;   
+}
+.box-square {
+    @include cajita(0);
+}
+  
+.box-rounded {
+    @include cajita(10px);
+}
+
+// Ejercicio 6: Escribe el código scss para generar el siguiente css, utiliza una lista
+
+$listita:("arial","bold",2em);
+
+.foo {
+    @for $i from 1 to 3 {
+        @if $i==1 {
+            font-family:nth($listita,$i);
+        }
+        @if $i==2 {
+            font-weight:nth($listita,$i);
+        }
+        @if $i==2 {
+            font-size:nth($listita,$i);
+        }         
+    }
+}
+
+// Ejercicio 7.- Escribe el código scss para obtener el siguiente css
+
+$gradiante:(top, #c9de96 0%, #8ab66b 44%, #398235 100%);
+
+.cssgradients{
+    .foo{
+        background: -webkit-linear-gradient($gradiante);
+        background: -moz-linear-gradient($gradiante);
+        background: linear-gradient($gradiante);
+    }
+}
+.no-cssgradients{
+    .foo{
+        background:nth($gradiante,2); 
+    }   
+}
+// Ejercicio 8.- Escribe el código scss necesario para obtener el siguiente css
+
+.foo{
+    .awesome{
+        .class{
+            .amazing{
+                .things{
+                    background: orange;
+                    .no-foo &{
+                        background: green; 
+                    } 
+                }
+            }
+        }
+    }
+}
+// Ejercicio 9.- Escribe el código scss necesario para obtener el siguiente css
+
+$color:(red,black);
+$uno:1;
+$dos:2px solid;
+
+
+.infobox {
+    width: 200px; 
+    .message{
+        border: #{$uno}px solid nth($color, 1);
+        .title{
+            color:nth($color, 1);
+        }
+    }
+    .user{
+        border: $dos nth($color, 2);
+        .title{
+            color:nth($color, 2);
+        }
+    }
+}
+// Ejercicio 10.- Escribe el código scss necesario para obtener el siguiente css, usa el operador &
+
+.infobox2 {
+    color: blue; 
+    .user2 &{
+        color: gray;
+        .message2 {
+            content: "Selector is '.user .infobox .message'"; 
+        }
+    }  
+}
+.message2 {
+    color: gray; 
+    .new {
+        color: red; 
+    }
+}
+// Ejercicio 11.- Realiza el siguiente ejercicio
+// Crea en un fichero scss llamado _color.scss con el siguiente contenido
+// Crea un fichero scss llamdo  _width.scss ,  con el siguiente contenido
+// A continuación importa los dos ficheros anteriores del modo que se indica
+@import "color";
+@import "width";
+
+#pagina{
+    color: $main_color;
+    width: $main_width;
+}
+#barra{
+    color: darken($main_color, 10%);
+    width: $main_width*0.2;
+}
+//Ejercicio 12.- importar simplemente
+
+//Ejercicio 13.- Utilizando mixin, crea el scss necesario para generar el siguiente código CSS. 
+
+@mixin productos($fontsize:0px) {
+    color: #336699;
+	font-family: helvetica, arial, sans-serif;
+	font-size: $fontsize;
+	font-variant: small-caps;
+    
+}
+.product_title {
+	@include productos(20px);
+}
+
+.product_title {
+	@include productos(100px); 
+}
+
+// Ejercicio 14.- Partiendo del siguiente mixin, genera el css que tienes en el enunciado.
+
+// Este contenido debe estar en un fichero independiente al que se use
+
+@mixin rounded_borders($color, $width: 10px, $rounding: 5px) {
+    -moz-border-radius: $rounding $rounding;
+    -webkit-border-radius: $rounding $rounding;
+    -khtml-border-radius: $rounding $rounding;
+    -o-border-radius: $rounding $rounding;
+    border-radius: $rounding $rounding;
+    border: $width $color solid; 
+}
+.midiv{
+    @include rounded_borders(blue);
+}
+
+    
+// Observar que el mixin lleva tres parámetros, dos de ellos con valores por defecto para que en el caso de 
+// que no se pase dicho parámetro, aplique ese valor por defecto
+
+// Ejercicio 15.- Realiza el siguiente ejercicio y aplícalo a un fichero html.
+
+@import "browser-opacity";
+
+.h1 {
+    @include opacity(60); 
+}
+
+// Ejercicio 16.- Usando la interpolación y los mixins con parámetros, escribe el código scss para generar 
+// el siguiente código css (las rutas de las imágenes pueden ser otras)
+
+@mixin coches1($color,$width) {
+    color: $color;
+    width: $width;
+}
+@mixin coches2($url) {
+    background: url($url); 
+}
+
+.car {
+    &.volvo_make{
+        @include coches1(green,100px);
+        .image {
+            @include coches2("images/volvo/green.png");
+        }
+    }  
+}
+.car{
+    &.corvette_make {
+        @include coches1(red,100px);
+        .image {
+            @include coches2("images/volvo/red.png");
+     
+        } 
+    }    
+}
+.car{
+    &.bmw_make {
+        @include coches1(black,100px);
+        .image {
+            @include coches2("images/volvo/black.png");
+     
+        } 
+    }
+}
+
+// Ejercicio 17.- Indicar que fichero css se obtiene del siguiente código scss.
+
+@mixin country_color($country) {
+    @if $country == france {
+        color: blue; 
+    }
+    @else if $country == spain {
+        color: yellow; 
+    }
+    @else if $country == italy {
+        color: green; 
+    }
+    @else {
+        color: red; 
+    } 
+}
+    
+.england {
+    @include country_color("england"); 
+}
+.france {
+    @include country_color("france"); 
+}
+
+// Ejercicio 18.- Utilizando mixins con parámetros escribe el código scss necesario, para crear el siguiente css
+
+@mixin secciones($margen:0 0 20px 0,$fuentefamily: "Jubilat, Georgia, serif",$tamanio:20px,
+$peso:"bold",$mayus:"uppercase") {
+    margin: $margen; 
+    font-family: $fuentefamily; 
+    font-size: $tamanio; 
+    font-weight: $peso; 
+    text-transform: $mayus; 
+}
+
+section{
+    &.main {
+        h2 { 
+            @include secciones();
+                color: #c63; 
+                background: #eee;
+        }
+    }
+}
+section{
+    &.secondary{
+        h3 { 
+            @include secciones();
+                color: #39c; 
+                background: #333;
+        }
+    }
+} 
+
+// Ejercicio 19.- Utilizando mixins con parámetros escribe el código scss necesario, para crear el siguiente css. 
+
+@mixin pack1($padding:4px,$radio:3px) {
+    padding: $padding; 
+    -webkit-border-radius: $radio; 
+    -moz-border-radius: $radio; 
+    border-radius: $radio; 
+}
+@mixin pack2() {
+    float: left; 
+    margin: 0 10px 0 0; 
+    border: 1px solid #ddd;
+}
+
+ol{
+    &.slats{
+        li{
+            a{
+                img { 
+                    @include pack1();
+                    @include pack2();
+                }
+            } 
+        }
+    }
+
+}  
+    
+div{
+    &.module {          
+        @include pack1(20px,10px);
+        background: #eee; 
+    }
+} 
+// Ejercicio 20.- Dado el siguiente código scss y el código css resultado de la compilación, escribe 
+// el mixin para obtener dicho código css.
+@mixin rounded($a){
+    -webkit-border-radius: 10px; 
+	-moz-border-radius: 10px; 
+	border-radius: 10px; 
+}
+@mixin shadow($a,$b,$c,$d){
+    -webkit-box-shadow: $a,$b,$c,$d; 
+	-moz-box-shadow: $a,$b,$c,$d; 
+	box-shadow: $a,$b,$c,$d;  
+}
+
+
+div{
+    &.module { 
+        padding: 20px; 
+        background: #eee; 
+        @include rounded(10px); 
+        @include shadow(0, 1px, 2px, rgba(0,0,0,0.5));
+    }
+} 

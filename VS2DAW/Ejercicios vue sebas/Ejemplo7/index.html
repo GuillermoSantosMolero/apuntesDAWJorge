@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<!--https://carlosazaustre.es/que-es-lo-que-me-gusta-de-vue-js/-->
+<head>
+    <meta charset="UTF-8">
+    <title>CURSO VUE</title>
+</head>
+<div id="app">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+</div>
+<template id="ejemplo7">
+    <div>
+        <ul>
+            <li v-for="(curso,index) in cursos" :key="index">
+                <!--Podemos ahorrarnos v-bind y poner directament ":href"-->
+                <a v-bind:href="curso.url">{{curso.nombre}}</a>
+            </li>
+        </ul>
+
+    <div v-if="ver"> 
+        {{mensaje}}  
+        <img :src="imagen" alt="" /> 
+    </div> 
+    <button @click="toggleVer()">ver/ocultar</button>
+    </div>
+</template>
+<script src="../vue.js"></script>
+<script src="ejemplo7.js"></script>
+
+</html>

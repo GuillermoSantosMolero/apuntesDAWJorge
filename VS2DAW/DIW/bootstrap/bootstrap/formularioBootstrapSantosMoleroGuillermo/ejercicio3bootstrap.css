@@ -1,0 +1,24 @@
+.container{
+    height: 100%;
+    width: 40%;
+}
+fieldset{
+    border: 0.15em black solid;
+    padding: 0.2em 1.5em;
+}
+fieldset legend{
+    width: auto;
+}
+label{
+    font-size: 1em;
+    font-weight: 700;
+}
+select{
+    width: 40%;
+}
+.radio{
+    margin-left: 0.5em;
+}
+input,textarea,select{
+    border-radius: 0.4em;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+    <title>CURSO VUE</title>
+    <link rel="stylesheet" href="../bootstrap.css">
+</head>
+
+<body>
+    <div id="app" class=" container mt-5">
+      <titulo></titulo>
+    </div>
+   
+    <script src="../vue.js"></script>
+    <script src="https://unpkg.com/vuex@3.1.2/dist/vuex.js"></script>
+    <script src="padre.js"></script>
+    <script src="hijo.js"></script>
+    
+    <script>
+      const store=new Vuex.Store({
+          state:{
+            numero:10,
+          },
+          mutations:{
+            /*Tambien se puede hacer incrementar(state)* {state.numero++}*/
+            incrementar(){
+              this.state.numero++;
+            },
+            decrementar(){
+              this.state.numero--;
+            }
+
+          }
+      })
+      
+      
+      new Vue({
+      el: '#app',
+      store
+    })
+  </script>
+</body>
+
+</html>

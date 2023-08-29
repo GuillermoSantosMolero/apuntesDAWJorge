@@ -1,0 +1,7 @@
+DWEC
+
+DOM - Document Object Model
+BOM - Browser Object Model
+Web components se desarrolla en HTML5+CSS+JS(Java Script)
+Responsive Desing
+ECMA Script - ES6 - ES2019  Especificación que dice como tiene que ser el lenguaje que procesa el motor del navegador.

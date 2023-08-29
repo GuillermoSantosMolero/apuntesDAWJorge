@@ -1,0 +1,19 @@
+.infobox {
+  color: blue;
+}
+.user .infobox {
+  color: gray;
+}
+
+.message {
+  color: gray;
+}
+.user .infobox .message {
+  content: "Selector is '.user .infobox .message'";
+}
+
+.message.new {
+  color: red;
+}
+
+/*# sourceMappingURL=ejrepasocarlos10.css.map */

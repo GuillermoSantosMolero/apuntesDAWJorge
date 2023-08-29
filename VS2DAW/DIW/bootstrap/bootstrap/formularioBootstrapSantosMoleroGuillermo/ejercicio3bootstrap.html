@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="ejercicio3bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <form>
+        <h3><strong>Información sobre el producto</strong></h3>
+        </h2>
+        <fieldset>
+            <legend>Datos básicos</legend>
+            <div class="row">
+                <label class="col-4">Nombre</label>
+            </div>
+            <div class="row">
+                <input type="text" class="col-10">
+            </div>
+            <br>
+            <div class="row">
+                <label class="col-4">Descripción</label>
+            </div> 
+            <div class="row">
+                <textarea class="col-11"></textarea>
+            </div>
+            <br>
+            <div class="row">
+                <label class="col-1">Foto</label>
+                <input type="file" class="col-10">
+            </div>
+            <br>
+            <div class="row">
+                <input type="checkbox" class="col-1">
+                <label>Añadir contador de visitas</label>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Datos económicos</legend>
+            <div class="row">
+                <div class="col-4">
+                    <label >Precio</Datos>
+                    <input class="col-5" type="text">
+                    <label>€</label>
+                </div>
+                <div class="col-5">
+                    <label >Impuesto</label>
+                    <select>
+                        <option>4%</option>
+                        <option>7%</option>
+                        <option>16%</option>
+                        <option>25%</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row"></div>
+                <label>Promoción</label>
+                <div class="radio">
+                    <input type="radio" name="radio"> Ninguno
+                </div>
+                <div class="radio">
+                    <input type="radio" name="radio"> Transporte gratuito
+                </div>
+                <div class="radio">
+                    <input type="radio" name="radio"> Descuento 5%
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

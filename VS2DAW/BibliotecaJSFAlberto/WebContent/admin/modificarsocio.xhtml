@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/WEB-INF/plantillas/plantilla.xhtml">
+	<ui:define name="title">modificar socio</ui:define>
+	<ui:define name="contenido">
+		<div id="divgeneral" class="formulariogeneral">
+			<h:messages globalOnly="true" layout="table" infoClass="advertencia"></h:messages>
+			
+			<h:form id="formularioprincipal" prependId="false">
+				<fieldset>
+					<legend>Búsqueda del Socio a modificar</legend>
+					<h:panelGrid id="panelgrid1" columns="2" border="0">
+						<h:outputText value="cadena a buscar:"></h:outputText>
+						<h:inputText id="cadenanombresocio" value="#{backingSocios.cadenanombresocio}">
+							<f:ajax event="keyup" listener="#{backingSocios.sociosporcadena}"
+								render="sociosencontrados0 sociosencontrados" />
+						</h:inputText>
+						<h:outputText value=""></h:outputText>
+					</h:panelGrid>
+				</fieldset>
+				
+				<h:panelGroup id="sociosencontrados0" layout="block" styleClass="nohayregistroscoincidentes">
+					<h:outputText id="sociosencontrados0outtext" value="no se han encontrado socios" 
+					rendered="#{backingSocios.listSocios!=null and backingSocios.totalSociosCandidatos==0}">
+					</h:outputText>
+				</h:panelGroup>
+				
+				<h:panelGroup id="sociosencontrados" layout="block">
+					<h:dataTable id="tablasocio" name="tablasocio" var="socio" value="#{backingSocios.listSocios}"
+					 rendered="#{backingSocios.totalSociosCandidatos>0}">				
+						<f:facet name="header">
+							<h:outputText value="Socios encontrados"></h:outputText>
+						</f:facet>
+						<h:column id ="Idsocio" headerClass="list-header">
+							<f:facet name="header">
+								<h:outputText value="Id"></h:outputText>
+							</f:facet>
+							<h:outputText value="#{socio.idsocio}"></h:outputText>
+						</h:column>
+						<h:column id ="Nombre" headerClass="list-header">
+							<f:facet name="header">
+								<h:outputText value="Nombre"></h:outputText>
+							</f:facet>
+							<h:outputText value="#{socio.nombre}"></h:outputText>
+						</h:column>
+						<h:column id ="Editar" headerClass="list-header">
+							<f:facet name="header">
+								<h:outputText value="Editar"></h:outputText>
+							</f:facet>
+							<h:commandLink action="#{backingSocios.editarSocio}" value="Editar ">
+								<f:setPropertyActionListener target="#{backingEditarSocio.socioseleccionado}" value="#{socio}"></f:setPropertyActionListener>
+							</h:commandLink>
+							<h:link value=" EditarV2" outcome="editarsocio2">
+								<f:param name="idsocio" value="#{socio.idsocio}"></f:param>
+								<f:param name="url" value="#/admin/modificarsocio.xhtml"></f:param>								
+							</h:link>
+						</h:column>
+				    </h:dataTable>
+				</h:panelGroup>
+			</h:form>
+		</div>	
+	</ui:define>
+</ui:composition>
+</html>

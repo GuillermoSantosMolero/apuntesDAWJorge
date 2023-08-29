@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/WEB-INF/plantillas/plantilla.xhtml"
+				xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"> 
+				
+<ui:define name="title">modificar socio</ui:define>
+
+<ui:define name="contenido">
+
+<div id="divgeneral" class="divformnuevoprestamo">
+
+<h:form id="formnuevoprestamo" prependId="false">
+
+<h:messages id="messages" globalOnly="true" layout="table" infoClass="info" errorClass="advertencia"></h:messages>
+
+<h:panelGrid title="Nuevo prestamo" columns="3" border="0">
+   
+   <h:outputText value="#{msg['generico.idsocio']}" ></h:outputText>
+   
+   <h:inputText id="idsocio" value="#{backingNuevoPrestamo.prestamo.socio.idsocio}" required="true" requiredMessage="Campo obligatorio"/>
+   
+   <h:message for="idsocio" errorClass="advertencia" id="messagesocio"></h:message>
+   
+   <h:outputText value="#{msg['generico.idejemplar']}" ></h:outputText>
+   
+   <h:inputText id="idejemplar" value="#{backingNuevoPrestamo.prestamo.idejemplar}" required="true" requiredMessage="Campo obligatorio"/>
+   
+   <h:message for="idejemplar" errorClass="advertencia" id="messagejemplar"></h:message>
+   
+   <h:outputText value=""></h:outputText>
+   
+   <h:commandButton action="#{backingNuevoPrestamo.nuevoPrestamo}" value="#{msg['generico.botonbuscar']}">  		
+		<f:ajax execute="@form" render="@form messages"></f:ajax>
+   </h:commandButton>
+   
+</h:panelGrid>
+
+</h:form>
+
+</div>
+</ui:define>
+</ui:composition>
+</html>

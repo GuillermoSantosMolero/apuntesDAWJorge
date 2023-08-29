@@ -1,0 +1,9 @@
+.menu{
+    color:blue;
+    font-size: 1px;
+}
+
+.item-menu{
+    @extend .menu;
+    background-color: grey;
+}

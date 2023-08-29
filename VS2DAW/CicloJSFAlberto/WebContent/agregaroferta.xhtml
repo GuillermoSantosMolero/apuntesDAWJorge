@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/WEB-INF/plantillas/plantilla.xhtml"
+				xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<ui:define name="metadata">
+	<f:metadata>		
+		<f:viewParam name="idies" value="#{backingAgregarOferta.idies}" />
+		<f:viewParam name="url" value="#{backingAgregarOferta.url}" />	
+  		<f:viewAction action="#{backingAgregarOferta.init()}" />		
+	</f:metadata>
+</ui:define>
+
+<ui:define name="contenido">
+
+<h:messages id="messages" globalOnly="true" layout="table" infoClass="info" errorClass="advertencia"></h:messages>
+
+<h:panelGroup id="panelgroupAgregarOfertas">
+
+<h:form id="formCiclos" prependId="false">
+
+<div class="divselectCiclos">
+
+	<h:selectOneMenu id="selectoneselectCiclos" value="#{backingAgregarOferta.idcicloseleccionado}" 
+					 rendered="#{backingAgregarOferta.listaCiclos.size()>0}" layout="pageDirection" styleClass="tabla">
+		<f:ajax event="change" listener="#{backingAgregarOferta.buscarturnos()}" render="panelgroupAgregarOfertas"/>
+		<f:selectItem itemLabel="seleccione un ciclo" itemValue="0"/>
+		<f:selectItems value="#{backingAgregarOferta.listaCiclos}" var="ciclo"
+					   itemLabel="#{ciclo.nombre}" itemValue="#{ciclo.idciclo}"/>	
+	</h:selectOneMenu>	
+
+</div>
+
+</h:form>
+
+<h:form id="formCiclos2" prependId="false">
+
+<div class="divselectTurnos">
+
+	<h:selectOneMenu id="selectoneselectTurnos" value="#{backingAgregarOferta.idturnoseleccionado}"
+	 		  		 disabled="#{backingAgregarOferta.listaTurnos==null}"	
+					 layout="pageDirection" styleClass="tabla">
+		<f:selectItem itemLabel="seleccione un ciclo" itemValue="0"/>
+		<f:selectItems value="#{backingAgregarOferta.listaTurnos}" var="turno"
+					   itemLabel="#{turno.descripcion}" itemValue="#{turno.idturno}"/>	
+	</h:selectOneMenu>	
+
+</div>
+
+<div class="divplazas">
+
+	<h:outputLabel for="plazas" value="Plazas" />		
+	<h:inputText id="plazas" value="#{backingAgregarOferta.plazas}"></h:inputText>				
+	<h:message id="msgplazas" for="plazas" errorClass="advertencia" />
+
+</div>
+
+<div class="divagregar">
+
+	<h:commandButton onclick="if(confirm('¿Desea Agregar la oferta?')) {return true;} else {return false;}"
+					 action="#{backingAgregarOferta.agregaroferta()}" value="Agregar Oferta">			 
+			<f:ajax execute ="@form" render="@form messages" />	
+		</h:commandButton>
+	
+	<h:commandButton value="Cancelar" action="#{backingAgregarOferta.cancelar}" immediate="true"></h:commandButton>
+</div>
+
+</h:form>
+
+</h:panelGroup>
+
+</ui:define>
+</ui:composition>
+</html>

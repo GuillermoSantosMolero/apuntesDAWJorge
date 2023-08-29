@@ -1,0 +1,164 @@
+//1
+a{
+    text-decoration: none;
+}
+a::hover{
+    text-decoration: underline;
+}
+//2
+nav{ ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+li{
+    display: inline-block;
+}
+a{
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+}}
+//3
+%estado{
+    border: 1px solid #ccc;
+    padding: 10px;
+    color: #333;
+}
+.success{
+    @extend %estado;
+    border-color: green;
+}
+.error{
+    @extend %estado;
+    border-color: red;
+}
+.warning{
+    @extend %estado;
+    border-color: yellow;
+}
+//4
+$maph:(
+    h1:darkorange,
+    h2:royalblue,
+    h3:springgreen
+);
+@each $u,$v in $maph{
+    #{$u}{
+    color: #{$v};
+    }
+}
+//5
+@mixin ejercicio5 ($entrada) {
+    -webkit-border-radius: $entrada;
+    -moz-border-radius:$entrada;
+    -ms-border-radius:$entrada;
+    border-radius:$entrada;
+}
+.box-square{
+    @include ejercicio5 (0);
+}
+.box-rounded{
+    @include ejercicio5 (10px);
+}
+//6
+$listaFont:family arial,weight bold,size 2em;
+.foo{
+    @each $a in $listaFont{
+        font-#{nth($a, 1)}:#{nth($a, 2)};
+    }
+}
+//7
+$lista7:-webkit-linear-gradient,-moz-linear-gradient,linear-gradient;
+    cssgradients  .foo {
+        @each $a in $lista7{
+            background: #{$a}(top, #c9de96 0%, #8ab66b 44%, #398235 100%);
+        }
+    }
+    .no-cssgradients .foo {
+        background: #c9de96;
+    }
+
+//8
+$clases:".foo .awesome .class .amazing .things";
+    #{$clases}{
+        background:orange;
+    }
+    .no-foo #{$clases}{
+        background: green;
+    }
+
+//9
+$info: ".infobox";
+$mensaje: ".message";
+$usuario:".user";
+$titulo: ".title";
+#{$info}{
+    width: 200px;
+}
+#{$info} #{$mensaje}{
+    border: 1px solid red; 
+}
+#{$info} #{$mensaje} #{$titulo}{
+    color: red; 
+}
+#{$info} #{$usuario}{
+    border: 2px solid black; 
+}
+#{$info} #{$usuario} #{$titulo}{
+    color: black; 
+}
+
+//10 no funciona
+.user{
+    .infobox{
+        color: blue;
+        &{
+            color: gray;
+            .message {
+                color: gray; 
+                & {
+                    content: "Selector is '.user .infobox .message'"; 
+                }
+            }
+        }   
+    }
+}
+
+//11
+@import "_color.scss";
+@import "_width.scss";
+#page {
+color: $main_color;
+width: $main_width; }
+#sidebar {
+color: darken($main_color, 10%);
+width: $main_width*0.2; }
+
+//12
+@import "_letras.scss";
+.letras{
+    font: $verdana;
+}
+
+//13
+@mixin estiloTitulo ($a){
+    color: #336699;
+	font-family: helvetica, arial, sans-serif;
+	font-size: #{$a}px;
+	font-variant: small-caps; 
+}
+.product_title{
+    @include estiloTitulo(20);
+}
+.product_title{
+    @include estiloTitulo(100);
+}
+
+//14
+@import "_mixin1.scss";
+.ejemploMixinImport{
+    @include rounded_borders(green);
+}
+
+//15

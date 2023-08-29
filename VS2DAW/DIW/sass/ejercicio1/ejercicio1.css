@@ -1,0 +1,161 @@
+a {
+  text-decoration: none;
+}
+
+a::hover {
+  text-decoration: underline;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.warning, .error, .success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+h1 {
+  color: darkorange;
+}
+
+h2 {
+  color: royalblue;
+}
+
+h3 {
+  color: springgreen;
+}
+
+.box-square {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  border-radius: 0;
+}
+
+.box-rounded {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.foo {
+  font-family: arial;
+  font-weight: bold;
+  font-size: 2em;
+}
+
+cssgradients .foo {
+  background: -webkit-linear-gradient(top, #c9de96 0%, #8ab66b 44%, #398235 100%);
+  background: -moz-linear-gradient(top, #c9de96 0%, #8ab66b 44%, #398235 100%);
+  background: linear-gradient(top, #c9de96 0%, #8ab66b 44%, #398235 100%);
+}
+
+.no-cssgradients .foo {
+  background: #c9de96;
+}
+
+.foo .awesome .class .amazing .things {
+  background: orange;
+}
+
+.no-foo .foo .awesome .class .amazing .things {
+  background: green;
+}
+
+.infobox {
+  width: 200px;
+}
+
+.infobox .message {
+  border: 1px solid red;
+}
+
+.infobox .message .title {
+  color: red;
+}
+
+.infobox .user {
+  border: 2px solid black;
+}
+
+.infobox .user .title {
+  color: black;
+}
+
+.user .infobox {
+  color: blue;
+}
+.user .infobox {
+  color: gray;
+}
+.user .infobox .message {
+  color: gray;
+}
+.user .infobox .message {
+  content: "Selector is '.user .infobox .message'";
+}
+
+#page {
+  color: #336699;
+  width: 720px;
+}
+
+#sidebar {
+  color: #264d73;
+  width: 144px;
+}
+
+.letras {
+  font: verdana, "bitstream vera sans", "dejavu sans", "liberation sans", geneva, sans-serif;
+}
+
+.product_title {
+  color: #336699;
+  font-family: helvetica, arial, sans-serif;
+  font-size: 20px;
+  font-variant: small-caps;
+}
+
+.product_title {
+  color: #336699;
+  font-family: helvetica, arial, sans-serif;
+  font-size: 100px;
+  font-variant: small-caps;
+}
+
+.ejemploMixinImport {
+  -moz-border-radius: 5px 5px;
+  -webkit-border-radius: 5px 5px;
+  -khtml-border-radius: 5px 5px;
+  -o-border-radius: 5px 5px;
+  border-radius: 5px 5px;
+  border: 5px green solid;
+}
+
+/*# sourceMappingURL=ejercicio1.css.map */

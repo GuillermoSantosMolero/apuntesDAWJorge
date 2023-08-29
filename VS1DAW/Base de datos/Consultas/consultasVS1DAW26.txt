@@ -1,0 +1,170 @@
+-- 1. Nombre y empleo de aquellos que tengan la calificacion de bueno, excelente o normal en su 
+--    oficio
+
+SELECT EMPLEADO.nombre EMPLEADO, oficio.oficio
+FROM EMPLEADO, OFICIO, OFICIOEMPLEADO OE
+WHERE oe.empleado=empleado.numemp
+AND oe.oficio=oficio.numoficio
+AND oe.calificacion IN ('BUENO','EXCELENTE','NORMAL')
+
+-- 2. Oficios para los que haya algun empleado que sea preciso o excelente
+
+SELECT oficio.oficio
+FROM EMPLEADO, OFICIO, OFICIOEMPLEADO OE
+WHERE oe.empleado=empleado.numemp
+AND oe.oficio=oficio.numoficio
+AND oe.calificacion IN ('EXCELENTE','PRECISO')
+
+-- 3. Obtener los nombres de los empleados alojados en el alojamiento
+--    regentado por John Peletier
+
+SELECT e.nombre
+FROM EMPLEADO E, ALOJAMIENTO A
+WHERE a.numaloj=e.alojamiento
+AND a.responsable like ('%JOHN PELETIER%')
+
+-- 4. Obtener los alojamientos donde se hospede al menos un obrero que cobre MAS DE un dolar diario
+
+SELECT DISTINCT a.alojamiento
+FROM EMPLEADO E, ALOJAMIENTO A, OFICIOEMPLEADO OE
+WHERE a.numaloj=e.alojamiento
+AND oe.empleado=e.numemp
+AND e.sueldo >= 1
+AND OE.OFICIO=(SELECT NUMOFICIO FROM OFICIO WHERE OFICIO='OBRERO'
+
+
+-- 5. Obtener los oficios para los que no hay ningun empleado
+
+SELECT o.oficio OFICIO
+FROM OFICIO O
+WHERE o.numoficio NOT IN 
+        (SELECT OE.OFICIO FROM OFICIOEMPLEADO OE GROUP BY oe.oficio)
+
+-- 6.Obtener el numero de labradores que se alojan en alguno de los
+--    alojamientos de keene. Obtener la media de edad de todos ellos.
+
+SELECT NVL(COUNT(e.numemp),0)EMPLEADOSENKEENE, AVG(E.EDAD) EDADMEDIA
+FROM EMPLEADO E, OFICIOEMPLEADO OE, OFICIO O, ALOJAMIENTO A
+WHERE e.numemp=oe.empleado
+AND o.numoficio=oe.oficio
+AND o.oficio=('LABRADOR')
+AND a.numaloj=e.alojamiento
+AND a.direccion LIKE ('%KEENE%')
+
+-- 7.Hallar el numero de oficios diferentes que pueden ejercer los
+--    inquilinos de ROSE HILL
+
+select COUNT(DISTINCT o.oficio) NUMERODEOFICIOS
+from OFICIO O, OFICIOEMPLEADO OE, EMPLEADO E, ALOJAMIENTO A
+WHERE oe.oficio=o.numoficio
+AND e.numemp=oe.empleado
+AND e.alojamiento=a.numaloj
+AND a.alojamiento LIKE ('%ROSE HILL%')
+
+-- 8. Obtener el nombre y la edad del trabajador mas viejo y del
+--    trabajador mas joven de todos los que residan en alguno de
+--    los alojamientos de EDMESTON
+
+SELECT NOMBRE, EDAD
+FROM EMPLEADO E ,ALOJAMIENTO A
+WHERE E.ALOJAMIENTO=A.NUMALOJ
+AND A.DIRECCION LIKE '%EDMESTON%'
+AND (EDAD=(SELECT MAX(EDAD)
+            FROM EMPLEADO E, ALOJAMIENTO A
+            WHERE E.NUMEMP=A.NUMALOJ
+            AND A.DIRECCION LIKE '%EDMESTON%')
+            OR EDAD=
+            (SELECT MIN(EDAD)
+            FROM EMPLEADO E, ALOJAMIENTO A
+            WHERE E.NUMEMP=A.NUMALOJ
+            AND A.DIRECCION LIKE '%EDMESTON%'))
+
+-- 9. Obtener ordenados de menor a mayor, la edad media de los
+--    trabajadores de cada uno de los oficios, siempre que haya
+--    mas de un trabajador para el oficio
+
+select O.OFICIO, A.EDADMEDIA
+FROM OFICIO O, (SELECT OE.OFICIO, AVG(E.EDAD) EDADMEDIA
+                FROM EMPLEADO E, OFICIOEMPLEADO OE
+                WHERE E.NUMEMP=OE.EMPLEADO
+                GROUP BY OE.OFICIO
+                HAVING COUNT (E.NUMEMP)>1)A
+WHERE o.numoficio=a.oficio
+ORDER BY a.edadmedia
+
+-- 10. Obtener en cada alojamiento, el nombre y el sueldo del 
+--     empleado que mas cobre
+
+SELECT NOMBRE,SUELDO,A.ALOJAMIENTO
+FROM EMPLEADO E, (SELECT A.NUMALOJ, A.ALOJAMIENTO,MAX(SUELDO)SUELDOMAXALOJ
+                    FROM EMPLEADO E, ALOJAMIENTO A
+                    WHERE E.ALOJAMIENTO=A.NUMALOJ
+                    GROUP BY A.NUMALOJ,A.ALOJAMIENTO)A
+WHERE E.ALOJAMIENTO=A.NUMALOJ
+AND SUELDO=SUELDOMAXALOJ
+
+-- 11.no Obtener el numero de trabajadores menores de 35 años que hay
+--     para cada especialidad, ordenados de mayor a menor numero
+--     de trabajadores
+SIN TERMINAR***************
+SELECT OE.OFICIO, B.EMPLEADOS
+FROM EMPLEADO E,(SELECT E.NUMEMP
+                  FROM EMPLEADO E
+                  WHERE E.EDAD<35)A,
+                (SELECT COUNT(E.NUMEMP)EMPLEADOS
+                    FROM EMPLEADO E, OFICIOEMPLEADO OE
+                    WHERE OE.EMPLEADO=E.NUMEMP
+                    GROUP BY OE.OFICIO)B
+WHERE E.NUMEMP=A.NUMEMP
+AND E.NUMEMP=B.NUMEMP
+
+-- 12.Obtener el nombre de los empleados que no vivan en ROSE HILL y
+--     sean mayores que al menos uno de los que viven en ROSE HILL
+
+SELECT DISTINCT E.NOMBRE, E.EDAD
+FROM EMPLEADO E, ALOJAMIENTO A,(SELECT MIN(E.EDAD) EDADCOMP
+                                FROM EMPLEADO E, ALOJAMIENTO A
+                                WHERE E.ALOJAMIENTO=A.NUMALOJ
+                                AND A.ALOJAMIENTO LIKE ('%ROSE HILL%'))B
+WHERE E.ALOJAMIENTO=A.NUMALOJ
+AND A.ALOJAMIENTO NOT LIKE ('%ROSE HILL%')
+AND E.EDAD>B.EDADCOMP
+ORDER BY E.EDAD DESC
+
+-- 13.Obtener el nombre del responsable del alojamiento con la edad
+--     media de sus clientes mas elevada
+
+SELECT RESPONSABLE
+FROM ALOJAMIENTO
+WHERE NUMALOJ=(SELECT ALOJAMIENTO
+                FROM EMPLEADO
+                GROUP BY ALOJAMIENTO
+                HAVING AVG(EDAD)=(SELECT MAX(AVG(EDAD))
+                                    FROM EMPLEADO
+                                    GROUP BY ALOJAMIENTO))
+
+-- 14.NOMBRE DE OFICIO, NOMBRE DE TRABAJADOR Y EDAD DEL/LOS TRABAJADORES 
+--    DE MAYOR EDAD EN CADA OFICIO
+
+SELECT E.NOMBRE, O.OFICIO, E.EDAD
+FROM EMPLEADO E, OFICIO O,( SELECT O.NUMOFICIO,MAX(E.EDAD) EDADMAX
+                            FROM EMPLEADO E, OFICIO O, OFICIOEMPLEADO OE
+                            WHERE E.NUMEMP=OE.EMPLEADO
+                            AND O.NUMOFICIO=OE.OFICIO
+                            GROUP BY OE.OFICIO,O.NUMOFICIO)A
+WHERE O.NUMOFICIO=A.NUMOFICIO
+AND E.EDAD=A.EDADMAX
+
+/* ******************************************************/
+-- 15. Obtener el nombre y el oficio de todos los empleados cuyo sueldo es igual al de JOHN PEARSON
+--     o al de DONALD ROLLO.
+
+SELECT E.NOMBRE, O.OFICIO, E.SUELDO
+FROM EMPLEADO E LEFT OUTER JOIN OFICIOEMPLEADO OE
+ON E.NUMEMP=OE.EMPLEADO LEFT OUTER JOIN OFICIO O
+ON OE.OFICIO=O.NUMOFICIO
+WHERE SUELDO IN(SELECT SUELDO 
+                FROM EMPLEADO
+                WHERE (NOMBRE ='DONALD ROLLO' OR NOMBRE='JOHN PEARSON'))
+                AND NOMBRE NOT IN ('DONALD ROLLO','JOHN PEARSON')
+

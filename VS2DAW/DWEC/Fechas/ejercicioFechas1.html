@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<!-- 1-Escribir una funcion que retorne el nombre del mes de una fecha dada en castellano
+ La fecha se introducirá en una caja de texto, formato dia-mes-año. Suponemos que la fecha es correcta,
+ es decir no hacemos comprobaciones.
+ 
+2-Escribir una función que compare dos fechas. La salida debe ser:
+"fecha1" es igual a "fecha2"
+"fecha1" es mayor que "fecha2"
+"fecha1" es menor que "fecha2"
+
+3-Escribir una función que devuelva la diferencia en días entre dos fechas dadas.
+ Se entiende que es la diferencia de días entre la mayor y la menor.
+
+4-Escribir una función para añadir un número de minutos a una fecha.
+ La funcion recibe fecha y numero de minutos a sumar. Retorna la nueva fecha.
+
+5-Dado un array de fechas escribe una funcion para obtener la fecha mas alta y otra para obtener la más baja.
+Es recomendable ordenar el array.
+
+6-Escribir una función que retorne el número de días que han transcurrido desde el inicio del
+año hasta una fecha dada de ese mismo año.-->
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title></title>
+		<style>
+			input{
+				width: 5em;
+			}
+		</style>
+
+	</head>
+	<body>
+		<h1>Ejercicio dates:</h1><br />
+		<form>
+			<label>Sacar mes del ano (dd-MM-yyyy)</label><br />
+			<textarea id="fecha1" value=""></textarea><br />
+			<p id="verMes"></p>
+			<input type="button" value="Ejecutar" onclick="sacarMes();" />
+		</form>
+		<p>******************************************************************************************************</p>
+		<form>
+			<label>Comparar dos fechas con formato (dd-MM-yyyy)</label><br />
+			<textarea id="fecha1comparar" value=""></textarea><br />
+			<textarea id="fecha2comparar" value=""></textarea><br />
+			<p id="comparacion"></p>
+			<input type="button" value="Ejecutar" onclick="compararFechas();" />
+		</form>
+		<p>******************************************************************************************************</p>
+		<form>
+			<label>Diferencia de dias de dos fechas con formato (dd-MM-yyyy)</label><br />
+			<textarea id="fecha1resta" value=""></textarea><br />
+			<textarea id="fecha2resta" value=""></textarea><br />
+			<p id="diferenciaDias"></p>
+			<input type="button" value="Ejecutar" onclick="diferenciaDias();" />
+		</form>
+		<p>******************************************************************************************************</p>
+		<label>Suma de minutos a una fecha</label><br />
+		<p id="sumaMinutos"></p>
+		<input type="button" value="Sumar" onclick="var min=60;
+													fechaSumaMinutos(min);" />
+		<p>******************************************************************************************************</p>
+		<label>Sacar la fecha mayor y la menor de un array de fechas</label><br />
+		<p id="menorMayorFecha"></p>
+		<input type="button" value="Sacar" onclick="sacarMenorMayorFecha();" />
+		<p>******************************************************************************************************</p>
+		<form>
+			<label>Sacar dias desde que empezo el ano (dd-MM-yyyy)</label><br />
+			<textarea id="fechadias" value=""></textarea><br />
+			<p id="verdias"></p>
+			<input type="button" value="Ejecutar" onclick="sacarDias();" />
+		</form>
+		<script>
+		var arrayFechas=[(new Date(2005,12,23,12,20,0)),(new Date(95,10,21,12,10,12)),(new Date(2004,10,23)),(new Date(2002,10,23)),
+		(new Date(99,10,23)),(new Date(2007,11,23)),(new Date(2012,10,23)),(new Date(2019,4,23)),(new Date(99,4,23)),(new Date(95,10,21,12,10,1))];
+		
+		function sacarMes(){
+			var meses=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+			var linea=document.getElementById("fecha1").value;
+			var mes =linea.substring(3,5);
+			if(mes>0 && mes<13){
+				document.getElementById("verMes").innerHTML="El mes introducido es "+meses[mes-1];
+			}else{
+				document.getElementById("verMes").innerHTML="No se ha introducido un mes correcto asegurese de que coincide con el formato de fecha (dd-MM-yyy)";
+			}
+		}
+		function compararFechas(){
+			var fechap=document.getElementById("fecha1comparar").value;
+			var fechas=document.getElementById("fecha2comparar").value;
+			if(fechap.substring(6,10) < 2000){
+				var d1 = new Date( fechap.substring(8,10), (fechap.substring(3,5)-1),fechap.substring(0,2));
+			}else{
+				var d1 = new Date( fechap.substring(6,10), (fechap.substring(3,5)-1),fechap.substring(0,2));
+			}
+			//alert(d1);
+			if(fechas.substring(6,10) < 2000){
+				var d2 = new Date( fechas.substring(8,10), (fechas.substring(3,5)-1),fechas.substring(0,2));
+			}else{
+				var d2 = new Date( fechas.substring(6,10), (fechas.substring(3,5)-1),fechas.substring(0,2));
+			}
+			//alert(d2);
+			if(d1>d2){
+				document.getElementById("comparacion").innerHTML=fechap+" es mayor que "+fechas;
+			}else{
+				if(d2>d1){
+					document.getElementById("comparacion").innerHTML=fechas+" es mayor que "+fechap;
+				}else{
+					document.getElementById("comparacion").innerHTML=fechap+" es igual que "+fechas;
+				}
+			}
+		}
+		function diferenciaDias(){
+			var fecha1res=document.getElementById("fecha1resta").value;
+			var fecha2res=document.getElementById("fecha2resta").value;
+			if(fecha1res.substring(6,10) < 2000){
+				var f1 = new Date( fecha1res.substring(8,10), (fecha1res.substring(3,5)-1),fecha1res.substring(0,2));
+			}else{
+				var f1 = new Date( fecha1res.substring(6,10), (fecha1res.substring(3,5)-1),fecha1res.substring(0,2));
+			}
+			if(fecha2res.substring(6,10) < 2000){
+			var f2 = new Date( fecha2res.substring(8,10), (fecha2res.substring(3,5)-1),fecha2res.substring(0,2));
+			}else{
+				var f2 = new Date( fecha2res.substring(6,10), (fecha2res.substring(3,5)-1),fecha2res.substring(0,2));
+			}
+			if(f1>=f2){
+				var diferencia = f1.getTime()-f2.getTime();
+			}else{
+				var diferencia = f2.getTime()-f1.getTime();
+			}
+			diferencia=diferencia/1000/3600/24;
+			if(diferencia!=Math.trunc(diferencia)){
+				diferencia=Math.trunc(diferencia)+1;
+			}
+			document.getElementById("diferenciaDias").innerHTML="La diferencia en dias de la fecha "+fecha1res
+			+" y la fecha "+fecha2res+" es de "+diferencia+" dias";
+				
+		}
+		function fechaSumaMinutos(minsuma){
+			var f = new Date();
+			var minutos = parseInt(minsuma);
+			f.setMinutes(f.getMinutes()+minsuma);
+			document.getElementById("sumaMinutos").innerHTML="La fecha sumandole "+minsuma+" es "+f;
+		}
+		
+		function sacarMenorMayorFecha(){
+			arrayFechas.sort(comparar);
+			document.getElementById("menorMayorFecha").innerHTML="La fecha mas antigua es "+arrayFechas[0]+" y la mas nueva es "+arrayFechas[arrayFechas.length-1];
+		}
+		function comparar ( a, b ){ 
+		return a - b; 
+		}
+		
+		function sacarDias(){
+		
+			var fechad=document.getElementById("fechadias").value;
+			if(fechad.substring(6,10) < 2000){
+				var f1 = new Date( fechad.substring(8,10), (fechad.substring(3,5)-1),fechad.substring(0,2));
+				var f2 = new Date(fechad.substring(8,10), 0, 0);
+			}else{
+				var f1 = new Date(fechad.substring(6,10), (fechad.substring(3,5)-1),fechad.substring(0,2));
+				var f2 = new Date(fechad.substring(6,10),0,0);
+			}
+			//alert(f1);
+			//alert(f2);
+			var diferencia=f1.getTime()-f2.getTime();
+			diferencia=diferencia/1000/3600/24;
+			if(diferencia!=Math.trunc(diferencia)){
+				diferencia=Math.trunc(diferencia)+1;
+			}
+			document.getElementById("verdias").innerHTML="La diferencia en dias de la fecha "+fechad
+			+" desde principios de ano es de "+diferencia+" dias";
+				
+		}
+		</script>
+	</body>
+	
+</html>

@@ -1,0 +1,16 @@
+.success, .warning, .error {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+/*# sourceMappingURL=ejrepasocarlos3.css.map */

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CURSO VUE</title>
+</head>
+<div id="app">
+    <ul>
+        <li v-for="(curso,index) in cursos" :key="index">
+            <a v-bind:href="curso.url">{{curso.nombre}}</a>
+        </li>
+    </ul>
+</div>
+<script src="../../vue.js"></script>
+<script src="ejemplo2.js"></script>
+</html>

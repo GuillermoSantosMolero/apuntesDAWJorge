@@ -1,0 +1,19 @@
+﻿
+## PEDIDO ##
+Número de pedido: { 20305 }
+Cliente: { Muebles Baratos S.A. }
+Código del cliente: { 00293 }
+Dirección de factura: { C/ De en frente, 15 }
+Dirección de entrega: { C/ De al lado, 25 }
+Nombre del contacto: { Paco}
+Teléfono del contacto: { 987654321 }
+Correo electrónico del contacto: { mail@mail1234.com }
+Fecha preferente de entrega: { 21/11/2015 }
+Forma de pago: { Transferencia }
+## ARTICULOS ##
+{ Código Artículo | Descripción | Cantidad }
+{ 0001200 | Tornillos tipo 1 | 50 }
+{ 0001231 | Tuercas tipo 1 | 60 }
+{ 0002200 | Arandelas tipo 2 | 75 }
+## FIN ARTICULOS ##
+## FIN PEDIDO ##

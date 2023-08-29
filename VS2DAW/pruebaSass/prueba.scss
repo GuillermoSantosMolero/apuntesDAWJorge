@@ -1,0 +1,125 @@
+$uno: box-sizing;
+$dos: border-box;
+$rosagris: #AEA4AD;
+$naranjagris: #EEE4DA;
+$azulgris: #506F8E;
+$amarillogris:#D9D0CB;
+*, *:before, *:after {
+    -moz-#{$uno}:$dos;
+    -webkit-#{$uno}:$dos;
+    #{$uno}:$dos;
+}
+body{
+    background: $naranjagris;
+    font-family: 'Didact Gothic', sans-serif;
+    margin:0;
+}
+a {
+   color: $azulgris;
+   &:hover {
+        color: $rosagris;
+   }
+}
+$tres: clear;
+.#{$tres}fix:after {
+    content: "";
+    display: table;
+    #{$tres}: both;
+}
+.wrapper {
+    margin: 0 auto;
+    width: 1200px;
+}
+$cuatro:transform;
+$cinco:scale(1.1);
+@mixin transformar() {
+    -webkit-#{$cuatro}: $cinco;
+    -moz-#{$cuatro}: $cinco;
+    -o-#{$cuatro}: $cinco;
+    -ms-#{$cuatro}: $cinco;
+    #{$cuatro}: $cinco;
+}
+.header{
+    background: $rosagris;
+    border-bottom: 10px solid #fff;
+    padding: 1em;
+    h1{
+        color:$azulgris;
+        font-family: 'Ribeye Marrow',cursive;
+        font-size: 3em;
+        margin: .25em 0;
+        text-shadow: 1px 1px 0px $amarillogris;
+    }
+    nav{
+        float: right;
+        ul{
+            list-style-type:none;
+            padding:0;
+        }
+        li{
+            display: inline-block;
+        }
+        a{
+            background: $azulgris;
+            border-radius: 20px;
+            color:$naranjagris;
+            display: block;
+            margin-right: 1em;
+            padding: .5em 1em;
+            text-decoration: none;
+            &:hover{
+                @include transformar();
+            }
+        }
+    }
+
+}
+.footer{
+    background: $azulgris;
+    border-top: 10px solid $naranjagris;
+    .copy{
+        color: $amarillogris;
+        float: right;
+        margin: 1em 0;
+    }
+    nav{
+        float: left;
+        ul{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            display: inline-block;
+        }
+        a{
+            color: $rosagris;
+            display: block;
+            padding: 1em;
+            &:hover{
+                color:$amarillogris;
+            }
+        }
+    }
+}
+.kittens{
+    list-style-type: none;
+    padding: 0;
+    li{
+        border-radius: 20px;
+        float: left;
+        margin-bottom: 2em;
+        text-align: center;
+        width: 300px;
+        &:hover{
+            @include transformar();
+        }
+        img {
+            border: 10px solid #fff;
+            border-radius: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+    }
+}

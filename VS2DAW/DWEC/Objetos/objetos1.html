@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<!---Dado un array de objetos tipo persona
+		persona		nombre
+					Apellidos
+					Edad
+					Nacionalidad
+	Generar dos arrays distintos. El primero ordenado alfabéticamente 
+	según el apellido y el segundo ordenado de mayor a menor edad.-->
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title></title>
+		<style>
+			input{
+				width: 5em;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Ejercicio objetos:</h1><br />
+		<label>Array por apellidos:</label>
+		<p id="mostrarArray1"></p>
+		<label>Array por edad:</label>
+		<p id="mostrarArray2"></p>
+		<input type="button" value="Ejecutar" onclick="jugar();" />
+		<script>
+		var arrayPersonas =[{apellidos:"Casas", nombre:"David", age:26, nacionalidad:"Esp"},{apellidos:"Campayo", nombre:"Carlos", age:22, nacionalidad:"Esp"}
+		,{apellidos:"Abascal", nombre:"Santiago", age:42, nacionalidad:"Esp"},{apellidos:"Casado", nombre:"Pablo", age:35, nacionalidad:"Esp"}
+		,{apellidos:"Sanchez", nombre:"Pedro", age:40, nacionalidad:"Esp"},{apellidos:"Rivera", nombre:"Albert", age:38, nacionalidad:"Esp"}
+		,{apellidos:"Rajoy", nombre:"Mariano", age:56, nacionalidad:"Esp"},{apellidos:"Santos", nombre:"Guillermo", age:19, nacionalidad:"Esp"}]
+		var lineaApellidos="";
+		function jugar(){
+			var lineaApellidos="";
+			arrayPersonas.sort(function(a ,b){
+			if (a.apellidos>b.apellidos){
+				return 1;
+			}else{ if(a.apellidos<b.apellidos){
+						return -1;
+					}else{
+						return 0;
+					}
+			}
+			});
+			for (var i=0;i<arrayPersonas.length;i++){
+				lineaApellidos=lineaApellidos+"////"+(i+1)+".- "+arrayPersonas[i].nombre+"-"+arrayPersonas[i].apellidos;
+			}
+			document.getElementById("mostrarArray1").innerHTML=lineaApellidos;
+			
+			var lineaEdad="";
+			arrayPersonas.sort(function(a ,b){
+			if (a.age>b.age){
+				return -1;
+			}else{ if(a.age<b.age){
+						return 1;
+					}else{
+						return 0;
+					}
+			}
+			});
+			for (var i=0;i<arrayPersonas.length;i++){
+				lineaEdad=lineaEdad+"////"+(i+1)+".- "+arrayPersonas[i].nombre+"-"+arrayPersonas[i].apellidos;
+			}
+			document.getElementById("mostrarArray2").innerHTML=lineaEdad;
+		}
+		</script>
+	</body>
+	
+</html>

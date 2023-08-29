@@ -1,0 +1,238 @@
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.success, .warning, .error {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}
+
+.warning {
+  border-color: yellow;
+}
+
+h1 {
+  color: "darkorange";
+}
+
+h2 {
+  color: "springgreen";
+}
+
+h3 {
+  color: "springgreen";
+}
+
+.box-square {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  border-radius: 0;
+}
+
+.box-rounded {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.foo {
+  font-family: "arial";
+  font-weight: "bold";
+  font-size: "bold";
+}
+
+.cssgradients .foo {
+  background: -webkit-linear-gradient(top, #c9de96 0%, #8ab66b 44%, #398235 100%);
+  background: -moz-linear-gradient(top, #c9de96 0%, #8ab66b 44%, #398235 100%);
+  background: linear-gradient(top, #c9de96 0%, #8ab66b 44%, #398235 100%);
+}
+
+.no-cssgradients .foo {
+  background: #c9de96 0%;
+}
+
+.foo .awesome .class .amazing .things {
+  background: orange;
+}
+.no-foo .foo .awesome .class .amazing .things {
+  background: green;
+}
+
+.infobox {
+  width: 200px;
+}
+.infobox .message {
+  border: 1px solid red;
+}
+.infobox .message .title {
+  color: red;
+}
+.infobox .user {
+  border: 2px solid black;
+}
+.infobox .user .title {
+  color: black;
+}
+
+.infobox2 {
+  color: blue;
+}
+.user2 .infobox2 {
+  color: gray;
+}
+.user2 .infobox2 .message2 {
+  content: "Selector is '.user .infobox .message'";
+}
+
+.message2 {
+  color: gray;
+}
+.message2 .new {
+  color: red;
+}
+
+#pagina {
+  color: #336699;
+  width: 720px;
+}
+
+#barra {
+  color: #264d73;
+  width: 144px;
+}
+
+.product_title {
+  color: #336699;
+  font-family: helvetica, arial, sans-serif;
+  font-size: 20px;
+  font-variant: small-caps;
+}
+
+.product_title {
+  color: #336699;
+  font-family: helvetica, arial, sans-serif;
+  font-size: 100px;
+  font-variant: small-caps;
+}
+
+.midiv {
+  -moz-border-radius: 5px 5px;
+  -webkit-border-radius: 5px 5px;
+  -khtml-border-radius: 5px 5px;
+  -o-border-radius: 5px 5px;
+  border-radius: 5px 5px;
+  border: 10px blue solid;
+}
+
+.h1 {
+  filter: alpha(opacity=60);
+  opacity: 0.6;
+}
+
+.car.volvo_make {
+  color: green;
+  width: 100px;
+}
+.car.volvo_make .image {
+  background: url("images/volvo/green.png");
+}
+
+.car.corvette_make {
+  color: red;
+  width: 100px;
+}
+.car.corvette_make .image {
+  background: url("images/volvo/red.png");
+}
+
+.car.bmw_make {
+  color: black;
+  width: 100px;
+}
+.car.bmw_make .image {
+  background: url("images/volvo/black.png");
+}
+
+.england {
+  color: red;
+}
+
+.france {
+  color: blue;
+}
+
+section.main h2 {
+  margin: 0 0 20px 0;
+  font-family: "Jubilat, Georgia, serif";
+  font-size: 20px;
+  font-weight: "bold";
+  text-transform: "uppercase";
+  color: #c63;
+  background: #eee;
+}
+
+section.secondary h3 {
+  margin: 0 0 20px 0;
+  font-family: "Jubilat, Georgia, serif";
+  font-size: 20px;
+  font-weight: "bold";
+  text-transform: "uppercase";
+  color: #39c;
+  background: #333;
+}
+
+ol.slats li a img {
+  padding: 4px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  float: left;
+  margin: 0 10px 0 0;
+  border: 1px solid #ddd;
+}
+
+div.module {
+  padding: 20px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  background: #eee;
+}
+
+div.module {
+  padding: 20px;
+  background: #eee;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0, 1px, 2px, rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0, 1px, 2px, rgba(0, 0, 0, 0.5);
+  box-shadow: 0, 1px, 2px, rgba(0, 0, 0, 0.5);
+}
+
+/*# sourceMappingURL=repaso2.css.map */

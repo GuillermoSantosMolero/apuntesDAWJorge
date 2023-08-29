@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Curso Vue</title>
+</head>
+<div id="app" class="container">
+    <titulo></titulo>
+</div>
+<!-- si es al reves se utiliza viewmodel -->
+<script src="../vue.js"></script>
+<script src="https://unpkg.com/vuex@3.1.2/dist/vuex.js"></script>
+<script src="padre.js"></script>
+<script src="hijo.js"></script>
+
+
+<script>
+    const store=new Vuex.Store({
+        state:{
+            numero:10,
+            cursos:[]
+        },
+        mutations:{
+            incrementar(state){
+                state.numero++;
+            },
+            decrementar(state,n){
+                state.numero-=n;
+            },
+            cargarCursos(state,cursoAccion){
+                state.cursos=cursoAccion;
+            }
+        },
+        actions:{
+            obtenerDatos: async function({commit}){
+                const datos=await fetch('curso.json');
+                const curso=await datos.json();
+                commit('cargarCursos',curso);
+            }
+        }
+    })
+    new Vue({
+        el:'#app',
+        store
+    })
+</script>
+</html>

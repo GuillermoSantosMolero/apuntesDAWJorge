@@ -1,0 +1,25 @@
+.container{
+    display: flex;
+    align-items: center;
+    padding: 5%;
+    height: 35em;
+}
+.datos{
+    width: 50%;
+    height: 80%;
+}
+.resultados{
+    width: 50%;
+    height: 80%;
+    display: none;
+}
+.texto{
+    resize: none;
+    height: 80%;
+    width: 90%;
+}
+.palabras{
+    resize: none;
+    height: 20em;
+    width: 90%;
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>Example</title>
+        <script type="text/JavaScript">
+            window.onload = function () {
+                //Determina si el navegador soporta getElementsByTagName
+                if(!document.getElementsByTagName) return false;
+                //Si lo soporta continua ejecutandolo
+                var enlaces =document.getElementsByTagName("a");
+                //enlaces es una array de elementos tipo <a>
+                //Recorrido del array para definir el evento onclick para cada elemento 
+                for(var i=0; i<enlaces.length;i++){
+                    if(enlaces[i].getAttribute("class") == "popup"){
+                        enlaces[i].onclick = function () {  
+                            popUp(this.getAttribute("href"));
+                            return false;  
+                        }
+                    }
+                }
+            }
+            function popUp(winURL) {
+                window.open(winURL,"_blank", "width=320, heigth=480");
+            }
+        </script>
+    </head>
+    <body>
+        <a href="https://www.elpais.com" class="popup">El pais</a>
+        <a href="https://www.example.com" class="popup">Pagina de ejemplo</a>
+        <a href="https://www.marca.com" class="popup">Marca</a>
+    </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/WEB-INF/plantillas/plantilla.xhtml"
+				xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<ui:define name="metadata">
+	<f:metadata>		
+		<f:viewParam name="idies" value="#{backingCiclo.idies}" />
+		<f:viewParam name="nombreies" value="#{backingCiclo.nombreies}" />
+		<f:viewParam name="cicloid" value="#{backingCiclo.idciclo}"/>
+		<f:viewParam name="ciclogrado" value="#{backingCiclo.grado}"/>
+		<f:viewParam name="ciclonombre" value="#{backingCiclo.ciclonombre}" />
+		<f:viewParam name="turnoid" value="#{backingCiclo.idturno}"/>
+		<f:viewParam name="turnodescripcion" value="#{backingCiclo.turnodescripcion}" />
+		<f:viewParam name="ofertaplazas" value="#{backingCiclo.plazas}" />
+		<f:viewParam name="url" value="#{backingCiclo.url}" />	
+  		<f:viewAction action="#{backingCiclo.init()}" />		
+	</f:metadata>
+</ui:define>
+
+<ui:define name="contenido">
+
+<h:form id="formmodificaroferta" prependId="false">
+		
+<h:panelGroup id="panelgroupmodificaroferta">
+
+	<h:panelGrid id="panelgridmodificaroferta" >
+	
+		<h:outputLabel for="ciclooferta" value="Ciclo:" />	
+		<h:inputText id="ciclooferta" value="#{backingCiclo.ofertaeducativaAeditar.ciclo.nombre}" disabled="true"></h:inputText> 		
+		<h:message id="msgciclooferta" for="ciclooferta" errorClass="advertencia" />
+		
+		<h:outputLabel for="turnooferta" value="Turno" />		
+		<h:inputText id="turnooferta" value="#{backingCiclo.ofertaeducativaAeditar.turno.descripcion}" disabled="true"></h:inputText>	 	
+		<h:message id="msgturnooferta" for="turnooferta" errorClass="advertencia" />
+		
+		<h:outputLabel for="plazasoferta" value="Plazas" />		
+		<h:inputText id="plazasoferta" value="#{backingCiclo.ofertaeducativaAeditar.plazas}"></h:inputText>				
+		<h:message id="msgplazasoferta" for="plazasoferta" errorClass="advertencia" />
+		
+		<h:commandButton onclick="if(confirm('¿Desea Modificar la oferta?')) {return true;} else {return false;}"
+					 action="#{backingCiclo.modificaroferta()}" value="Modificar Oferta">			 
+			<f:ajax execute ="@form" render="@form messages" />	
+		</h:commandButton>
+	
+		<h:commandButton value="Cancelar" action="#{backingCiclo.cancelar}" immediate="true"></h:commandButton>
+		
+	</h:panelGrid>
+
+</h:panelGroup>
+
+</h:form>
+
+</ui:define>
+</ui:composition>
+</html>

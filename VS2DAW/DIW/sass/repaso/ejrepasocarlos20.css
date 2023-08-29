@@ -1,0 +1,12 @@
+div.module {
+  padding: 20px;
+  background: #eee;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0, 1px, 2px, rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0, 1px, 2px, rgba(0, 0, 0, 0.5);
+  box-shadow: 0, 1px, 2px, rgba(0, 0, 0, 0.5);
+}
+
+/*# sourceMappingURL=ejrepasocarlos20.css.map */

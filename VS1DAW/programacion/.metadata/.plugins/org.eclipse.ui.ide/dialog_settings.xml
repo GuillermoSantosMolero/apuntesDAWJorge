@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="C:\Users\Guillermo\Desktop\VS1DAW\programacion\TrabajoFinal"/>
+		<item value="C:\Users\Guillermo\Desktop\VS1DAW\programacion\GestionArticulo"/>
+		<item value="C:\Users\Guillermo\Desktop\VS1DAW\programacion\FicheroPassword2.0\src\FuncionesInterfaz"/>
+		<item value="C:\Users\Guillermo\Desktop\VS1DAW\programacion\FicheroPassword2.0"/>
+		<item value="C:\Users\Guillermo\Desktop\VS1DAW\programacion\FicheroPassword"/>
+		<item value="C:\Users\Guillermo\Desktop\VS1DAW\programacion\EstructurasDeAlmacenamiento"/>
+		<item value="C:\Users\Guillermo\Desktop\VS1DAW\programacion\DNIOtraForma"/>
+		<item value="C:\Users\Guillermo\Desktop\VS1DAW\programacion"/>
+	</list>
+	<section name="NewWizardAction">
+	</section>
+</section>

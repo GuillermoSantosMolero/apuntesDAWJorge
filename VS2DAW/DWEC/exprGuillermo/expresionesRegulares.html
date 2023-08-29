@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="expresionesRegulares.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="datos">
+        <textarea id="texto" class="texto" onfocusOut="desactivarTexto()"></textarea>
+        <button id="contaPalabras" type="button" onClick="contarPalabras()" disabled>Contar Palabras</button>
+    </div>
+    <div class="resultados" id="resultados">
+        <fieldset onchange="sacarPalabrasPorCaracteres()">
+            <h4 id="palabrasTotales">Palabras totales: X</h4>
+            <select id="numLetras" disabled>
+                <option value="none" id="opcion">Seleccione una opción</option>
+                <option value="3">3 o menos</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8 o más</option>
+            </select>
+            <textarea id="palabras" class="palabras" disabled></textarea>
+            <h5 id="subtotalPalabras"></h5>
+        </fieldset>
+    </div>
+</div>
+<script type="text/javascript" src=expresionesRegulares.js></script>
+</body>
+</html>

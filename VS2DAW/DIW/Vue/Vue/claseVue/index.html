@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CURSO VUE</title>
+</head>
+<div id="app">
+</div>
+<template id="ejemplo5">
+    <div>
+        <div v-if="ver">
+            {{mensaje}}
+            <img :src="imagen" :alt="mensaje">
+        </div>
+        <button @click="toggleVer()">ver/ocultar</button>
+    </div>
+</template>
+<script src="../../vue.js"></script>
+<script src="ejemplo1.js"></script>
+</html>

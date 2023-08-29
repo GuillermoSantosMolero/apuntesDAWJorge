@@ -1,0 +1,6 @@
+@function ancho-col($total,$col){
+    @return porcentage($total/$col);
+}
+.sidebar{
+    width: ancho-col(5,10);
+}
